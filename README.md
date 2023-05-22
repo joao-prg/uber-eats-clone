@@ -1,1 +1,1 @@
-# iFood-clone-quarkus
+# uber-eats-clone
