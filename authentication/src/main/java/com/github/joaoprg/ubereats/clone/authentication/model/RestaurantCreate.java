@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+// TODO - Lombok
+
 public class RestaurantCreate {
 
     @Pattern(regexp = "[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}\\/[0-9]{4}\\-[0-9]{2}")
@@ -15,5 +17,4 @@ public class RestaurantCreate {
     public String name;
 
     public AddressRead address;
-
 }
