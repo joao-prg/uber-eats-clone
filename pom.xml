@@ -19,6 +19,7 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <timestamp>${maven.build.timestamp}</timestamp>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+        <lombok.version>1.18.26</lombok.version>
         <dependency.version.quarkus>2.16.6.Final</dependency.version.quarkus>
     </properties>
 

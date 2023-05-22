@@ -13,10 +13,8 @@ import org.mapstruct.MappingTarget;
 public interface RestaurantMapper {
 
     @Mapping(target = "name", source = "name")
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "address.id", ignore = true)
     public Restaurant toRestaurant(RestaurantCreate restaurantCreate);
 
     @Mapping(target = "name", source = "name")
