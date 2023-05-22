@@ -1,20 +1,29 @@
 package com.github.joaoprg.ubereats.clone.authentication.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-// TODO - Lombok (entities and DTOs)
+@Data
+@Getter(onMethod = @__({@Schema(hidden = true)}))
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 
 public class RestaurantCreate {
 
-    @Pattern(regexp = "[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}\\/[0-9]{4}\\-[0-9]{2}")
-    @NotNull
-    public String cnpj;
-
-    @Size(min = 3, max = 30)
+    @NotNull(message = "Name cannot be null")
+    @Size(max = 50)
     public String name;
 
+    @Valid
     public AddressRead address;
 }

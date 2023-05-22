@@ -44,9 +44,6 @@ public class Restaurant {
     @NotBlank(message = "Owner cannot be blank")
     public String owner;
 
-    @NotNull(message = "CNPJ cannot be null")
-    public String cnpj;
-
     @NotNull(message = "Name cannot be null")
     @Size(max = 50)
     public String name;
