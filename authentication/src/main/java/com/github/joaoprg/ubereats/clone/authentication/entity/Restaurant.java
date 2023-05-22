@@ -16,8 +16,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.UUID;
@@ -54,11 +56,14 @@ public class Restaurant {
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
+    @Valid
     public Address address;
 
     @Column(name = "created_at")
+    @PastOrPresent
     public Instant createdAt;
 
     @Column(name = "updated_at")
+    @PastOrPresent
     public Instant updatedAt;
 }
