@@ -39,10 +39,11 @@ public class RestaurantService {
         return restaurantMapper.toRestaurantRead(restaurant);
     }
 
-    public List<RestaurantRead> read() {
+    public List<RestaurantRead> readAll() {
         List<Restaurant> restaurants = restaurantRepository.listAll();
         return restaurants.stream().map(restaurantMapper::toRestaurantRead).collect(Collectors.toList());
     }
+
 
     @Transactional(REQUIRED)
     public RestaurantRead update(final UUID restaurantId, @Valid final RestaurantUpdate restaurantUpdate) {
@@ -63,6 +64,7 @@ public class RestaurantService {
                         .orElseThrow(() -> new NotFoundException(
                                 String.format("Restaurant not found! [Id: %s]", restaurantId))
                         );
+        restaurantRepository.findById(restaurantId);
         restaurantRepository.delete(restaurant);
     }
 }
