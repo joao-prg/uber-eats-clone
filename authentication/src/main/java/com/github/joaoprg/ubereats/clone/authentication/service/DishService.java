@@ -12,7 +12,6 @@ import com.github.joaoprg.ubereats.clone.authentication.repository.RestaurantRep
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.UUID;
@@ -39,7 +38,7 @@ public class DishService {
     }
 
     @Transactional(REQUIRED)
-    public DishRead create(final UUID restaurantId, @Valid final DishCreate dishCreate) {
+    public DishRead create(final UUID restaurantId, final DishCreate dishCreate) {
         final Restaurant restaurant =
                 restaurantRepository.findByIdOptional(restaurantId)
                         .orElseThrow(() -> new NotFoundException(
@@ -66,7 +65,7 @@ public class DishService {
     }
 
     @Transactional(REQUIRED)
-    public DishRead update(final UUID restaurantId, final UUID dishId, @Valid final DishUpdate dishUpdate) {
+    public DishRead update(final UUID restaurantId, final UUID dishId, final DishUpdate dishUpdate) {
         restaurantRepository.findByIdOptional(restaurantId)
                 .orElseThrow(() -> new NotFoundException(
                         String.format("Restaurant not found! [Id: %s]", restaurantId))
