@@ -10,7 +10,6 @@ import com.github.joaoprg.ubereats.clone.authentication.repository.RestaurantRep
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -46,11 +45,7 @@ public class RestaurantService {
 
     @Transactional(REQUIRED)
     public RestaurantRead update(final UUID restaurantId, final RestaurantUpdate restaurantUpdate) {
-        final Restaurant restaurant =
-                restaurantRepository.findByIdOptional(restaurantId)
-                        .orElseThrow(() -> new NotFoundException(
-                                String.format("Restaurant not found! [Id: %s]", restaurantId))
-                        );
+        final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
         restaurantMapper.toRestaurant(restaurantUpdate, restaurant);
         restaurantRepository.persist(restaurant);
         return restaurantMapper.toRestaurantRead(restaurant);
@@ -58,11 +53,7 @@ public class RestaurantService {
 
     @Transactional(REQUIRED)
     public void delete(final UUID restaurantId) {
-        final Restaurant restaurant =
-                restaurantRepository.findByIdOptional(restaurantId)
-                        .orElseThrow(() -> new NotFoundException(
-                                String.format("Restaurant not found! [Id: %s]", restaurantId))
-                        );
+        final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
         restaurantRepository.findById(restaurantId);
         restaurantRepository.delete(restaurant);
     }

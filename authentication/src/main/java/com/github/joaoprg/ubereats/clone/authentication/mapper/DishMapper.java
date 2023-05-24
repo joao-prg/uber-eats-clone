@@ -15,5 +15,4 @@ public interface DishMapper {
     Dish toDish(DishCreate dishCreate);
 
     void toDish(DishUpdate dishUpdate, @MappingTarget Dish dish);
-
 }

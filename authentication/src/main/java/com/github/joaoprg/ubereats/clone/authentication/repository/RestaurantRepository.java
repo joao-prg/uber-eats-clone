@@ -5,8 +5,17 @@ import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
+import javax.ws.rs.NotFoundException;
 import java.util.UUID;
 
 @ApplicationScoped
 @Transactional
-public class RestaurantRepository implements PanacheRepositoryBase<Restaurant, UUID> { }
+public class RestaurantRepository implements PanacheRepositoryBase<Restaurant, UUID> {
+
+    public Restaurant readByIdOptional(final UUID restaurantId) {
+        return this.findByIdOptional(restaurantId)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Restaurant not found! [Id: %s]", restaurantId))
+                );
+    }
+}

@@ -12,7 +12,6 @@ import com.github.joaoprg.ubereats.clone.authentication.repository.RestaurantRep
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -39,11 +38,7 @@ public class DishService {
 
     @Transactional(REQUIRED)
     public DishRead create(final UUID restaurantId, final DishCreate dishCreate) {
-        final Restaurant restaurant =
-                restaurantRepository.findByIdOptional(restaurantId)
-                        .orElseThrow(() -> new NotFoundException(
-                                String.format("Restaurant not found! [Id: %s]", restaurantId))
-                        );
+        final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
         Dish dish = dishMapper.toDish(dishCreate);
         dish.restaurant = restaurant;
         dishRepository.persist(dish);
@@ -56,25 +51,15 @@ public class DishService {
     }
 
     public List<DishRead> readByRestaurant(final UUID restaurantId) {
-        restaurantRepository.findByIdOptional(restaurantId)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Restaurant not found! [Id: %s]", restaurantId))
-                );
+        restaurantRepository.readByIdOptional(restaurantId);
         List<Dish> dishes = dishRepository.readByRestaurant(restaurantId);
         return dishes.stream().map(dishMapper::toDishRead).collect(Collectors.toList());
     }
 
     @Transactional(REQUIRED)
     public DishRead update(final UUID restaurantId, final UUID dishId, final DishUpdate dishUpdate) {
-        restaurantRepository.findByIdOptional(restaurantId)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Restaurant not found! [Id: %s]", restaurantId))
-                );
-        final Dish dish =
-                dishRepository.findByIdOptional(dishId)
-                        .orElseThrow(() -> new NotFoundException(
-                                String.format("Dish not found! [Id: %s]", dishId))
-                        );
+        restaurantRepository.readByIdOptional(restaurantId);
+        final Dish dish = dishRepository.readByIdOptional(dishId);
         dishMapper.toDish(dishUpdate, dish);
         dishRepository.persist(dish);
         return dishMapper.toDishRead(dish);
@@ -82,15 +67,8 @@ public class DishService {
 
     @Transactional(REQUIRED)
     public void delete(final UUID restaurantId, final UUID dishId) {
-        restaurantRepository.findByIdOptional(restaurantId)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Restaurant not found! [Id: %s]", restaurantId))
-                );
-        final Dish dish =
-                dishRepository.findByIdOptional(dishId)
-                        .orElseThrow(() -> new NotFoundException(
-                                String.format("Dish not found! [Id: %s]", dishId))
-                        );
+        restaurantRepository.readByIdOptional(restaurantId);
+        final Dish dish = dishRepository.readByIdOptional(dishId);
         dishRepository.delete(dish);
     }
 }

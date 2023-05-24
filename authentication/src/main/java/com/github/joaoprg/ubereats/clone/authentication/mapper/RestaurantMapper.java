@@ -23,5 +23,4 @@ public interface RestaurantMapper {
     @Mapping(target = "name", source = "name")
     @Mapping(target = "createdAt", dateFormat = "dd/MM/yyyy HH:mm:ss")
     public RestaurantRead toRestaurantRead(Restaurant restaurant);
-
 }
