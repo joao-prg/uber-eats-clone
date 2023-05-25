@@ -90,6 +90,8 @@ public class RestaurantResource implements RestaurantApi{
             final DishRead dishRead = dishService.create(restaurantId, dishCreate);
             final URI uri = uriInfo.getAbsolutePathBuilder().path(dishRead.getId().toString()).build();
             return Response.created(uri).entity(dishRead).build();
+        } catch (NotFoundException nfexc) {
+            return Response.status(Response.Status.NOT_FOUND).build();
         } catch (Exception exc) {
             return Response.serverError().entity(exc.getMessage()).build();
         }
