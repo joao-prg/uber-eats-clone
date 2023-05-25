@@ -60,7 +60,6 @@ public class RestaurantService {
     public void delete(final UUID restaurantId) {
         log.debug(String.format("Deleting restaurant...[Id: %s]", restaurantId));
         final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
-        restaurantRepository.findById(restaurantId);
         restaurantRepository.delete(restaurant);
     }
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+import javax.json.bind.annotation.JsonbProperty;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -58,6 +59,7 @@ public class RestaurantRead {
     @Valid
     public AddressRead address;
 
+    @JsonbProperty("created_at")
     @Schema(
             required = true,
             description = "Creation date of the restaurant entry.",

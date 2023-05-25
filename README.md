@@ -1,7 +1,6 @@
 # uber-eats-clone
 
 Future work:
-- Create models for lists
-- Add pagination
 - Better exception handling
+- Add pagination to list methods
 - Check OpenAPI docs

@@ -15,6 +15,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.spi.HttpRequest;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -25,8 +26,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.UUID;
 
 @Path("/restaurants")
@@ -94,7 +97,8 @@ public interface RestaurantApi {
     Response createRestaurant(
             @NotNull
             @Valid
-            final RestaurantCreate restaurantCreate);
+            final RestaurantCreate restaurantCreate,
+            @Context UriInfo uriInfo);
 
     @GET
     @Path("/")
@@ -145,7 +149,7 @@ public interface RestaurantApi {
                             schema = @Schema(ref = "error"))
             )
     })
-    Response readAllRestaurants();
+    Response readAllRestaurants(@Context UriInfo uriInfo);
 
     @PUT
     @Path("/{restaurant_id}")
@@ -232,7 +236,8 @@ public interface RestaurantApi {
             final UUID restaurantId,
             @NotNull
             @Valid
-            final RestaurantUpdate restaurantUpdate);
+            final RestaurantUpdate restaurantUpdate,
+            @Context UriInfo uriInfo);
 
     @DELETE
     @Path("/{restaurant_id}")
@@ -292,7 +297,8 @@ public interface RestaurantApi {
             schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
             @PathParam("restaurant_id")
-            final UUID restaurantId);
+            final UUID restaurantId,
+            @Context UriInfo uriInfo);
 
 
     @POST
@@ -367,7 +373,8 @@ public interface RestaurantApi {
             final UUID restaurantId,
             @NotNull
             @Valid
-            final DishCreate dishCreate);
+            final DishCreate dishCreate,
+            @Context UriInfo uriInfo);
 
     @GET
     @Path("/dishes")
@@ -418,7 +425,7 @@ public interface RestaurantApi {
                             schema = @Schema(ref = "error"))
             )
     })
-    Response readAllDishes();
+    Response readAllDishes(@Context UriInfo uriInfo);
 
 
     @GET
@@ -480,7 +487,8 @@ public interface RestaurantApi {
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
             @PathParam("restaurant_id")
-            final UUID restaurantId);
+            final UUID restaurantId,
+            @Context UriInfo uriInfo);
 
 
     @PUT
@@ -578,7 +586,8 @@ public interface RestaurantApi {
             final UUID dishId,
             @NotNull
             @Valid
-            final DishUpdate dishUpdate);
+            final DishUpdate dishUpdate,
+            @Context UriInfo uriInfo);
 
     @DELETE
     @Path("/{restaurant_id}/dishes/{dish_id}")
@@ -648,5 +657,6 @@ public interface RestaurantApi {
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
             @PathParam("dish_id")
-            final UUID dishId);
+            final UUID dishId,
+            @Context UriInfo uriInfo);
 }
