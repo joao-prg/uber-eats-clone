@@ -12,7 +12,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "cdi", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface DishMapper {
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "restaurant", ignore = true)
     Dish toDish(DishCreate dishCreate);
 

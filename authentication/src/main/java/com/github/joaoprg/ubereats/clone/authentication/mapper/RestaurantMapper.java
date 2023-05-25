@@ -13,8 +13,6 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "cdi", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface RestaurantMapper {
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "address.id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "dishes", ignore = true)
@@ -23,6 +21,5 @@ public interface RestaurantMapper {
     @Mapping(target = "createdAt", dateFormat = "dd/MM/yyyy HH:mm:ss")
     public RestaurantRead toRestaurantRead(Restaurant restaurant);
 
-    @Mapping(target = "address.id", ignore = true)
     public void toRestaurant(RestaurantUpdate restaurantUpdate, @MappingTarget Restaurant restaurant);
 }
