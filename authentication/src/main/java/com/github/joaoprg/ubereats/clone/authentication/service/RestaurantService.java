@@ -6,6 +6,7 @@ import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantCreate;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.repository.RestaurantRepository;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 
 @ApplicationScoped
+@Slf4j
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
@@ -32,12 +34,14 @@ public class RestaurantService {
 
     @Transactional(REQUIRED)
     public RestaurantRead create(final RestaurantCreate restaurantCreate) {
+        log.debug(String.format("Creating restaurant...[Name: %s]", restaurantCreate.name));
         Restaurant restaurant = restaurantMapper.toRestaurant(restaurantCreate);
         restaurantRepository.persist(restaurant);
         return restaurantMapper.toRestaurantRead(restaurant);
     }
 
     public List<RestaurantRead> readAll() {
+        log.debug("Reading all restaurants...");
         List<Restaurant> restaurants = restaurantRepository.listAll();
         return restaurants.stream().map(restaurantMapper::toRestaurantRead).collect(Collectors.toList());
     }
@@ -45,6 +49,7 @@ public class RestaurantService {
 
     @Transactional(REQUIRED)
     public RestaurantRead update(final UUID restaurantId, final RestaurantUpdate restaurantUpdate) {
+        log.debug(String.format("Updating restaurant...[Id: %s]", restaurantId));
         final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
         restaurantMapper.toRestaurant(restaurantUpdate, restaurant);
         restaurantRepository.persist(restaurant);
@@ -53,6 +58,7 @@ public class RestaurantService {
 
     @Transactional(REQUIRED)
     public void delete(final UUID restaurantId) {
+        log.debug(String.format("Deleting restaurant...[Id: %s]", restaurantId));
         final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
         restaurantRepository.findById(restaurantId);
         restaurantRepository.delete(restaurant);

@@ -2,7 +2,6 @@
 
 Future work:
 - Create models for lists
-- Better exception handling
-- Logging
 - Add pagination
+- Better exception handling
 - Check OpenAPI docs

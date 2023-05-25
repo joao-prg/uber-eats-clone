@@ -8,6 +8,7 @@ import com.github.joaoprg.ubereats.clone.authentication.model.DishRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.repository.DishRepository;
 import com.github.joaoprg.ubereats.clone.authentication.repository.RestaurantRepository;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 
 @ApplicationScoped
+@Slf4j
 public class DishService {
 
     private final RestaurantRepository restaurantRepository;
@@ -38,6 +40,7 @@ public class DishService {
 
     @Transactional(REQUIRED)
     public DishRead create(final UUID restaurantId, final DishCreate dishCreate) {
+        log.debug(String.format("Creating dish...[Name: %s] [Restaurant Id: %s]", dishCreate.name, restaurantId));
         final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
         Dish dish = dishMapper.toDish(dishCreate);
         dish.restaurant = restaurant;
@@ -48,11 +51,13 @@ public class DishService {
     }
 
     public List<DishRead> readAll() {
+        log.debug("Reading all dishes...");
         List<Dish> dishes = dishRepository.listAll();
         return dishes.stream().map(dishMapper::toDishRead).collect(Collectors.toList());
     }
 
     public List<DishRead> readByRestaurant(final UUID restaurantId) {
+        log.debug(String.format("Reading all dishes for restaurant [Restaurant Id: %s]", restaurantId));
         restaurantRepository.readByIdOptional(restaurantId);
         List<Dish> dishes = dishRepository.readByRestaurant(restaurantId);
         return dishes.stream().map(dishMapper::toDishRead).collect(Collectors.toList());
@@ -60,6 +65,7 @@ public class DishService {
 
     @Transactional(REQUIRED)
     public DishRead update(final UUID restaurantId, final UUID dishId, final DishUpdate dishUpdate) {
+        log.debug(String.format("Updating dish...[Id: %s] [Restaurant Id: %s]", dishId, restaurantId));
         final Dish dish = dishRepository.readByIdOptional(restaurantId, dishId);
         dishMapper.toDish(dishUpdate, dish);
         dishRepository.persist(dish);
@@ -68,6 +74,7 @@ public class DishService {
 
     @Transactional(REQUIRED)
     public void delete(final UUID restaurantId, final UUID dishId) {
+        log.debug(String.format("Deleting dish...[Id: %s] [Restaurant Id: %s]", dishId, restaurantId));
         final Dish dish = dishRepository.readByIdOptional(restaurantId, dishId);
         dishRepository.delete(dish);
     }
