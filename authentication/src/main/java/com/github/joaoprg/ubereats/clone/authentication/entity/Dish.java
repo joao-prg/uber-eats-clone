@@ -8,18 +8,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.util.UUID;
@@ -32,6 +23,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "dish")
+@IdClass(DishKey.class)
 public class Dish {
 
     @Id
@@ -41,6 +33,10 @@ public class Dish {
     @GeneratedValue(generator = "uuid")
     private UUID id;
 
+    @Id
+    @Column(name = "restaurant_id")
+    private UUID restaurantId;
+
     @NotNull(message = "Name cannot be null")
     @Size(max = 50)
     public String name;
@@ -49,7 +45,8 @@ public class Dish {
     public String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id")
+    @MapsId("restaurantId")
+    @JoinColumn(name = "restaurant_id", nullable=false)
     @Valid
     public Restaurant restaurant;
 

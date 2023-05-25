@@ -14,9 +14,18 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@Schema(
+        description = "Fields to update in a given dish.",
+        writeOnly = true
+)
 public class DishUpdate {
 
+    @Schema(
+            required = true,
+            description = "Price of the dish.",
+            example = "5.50",
+            minimum = "0"
+    )
     @PositiveOrZero
     public Double price;
 }

@@ -41,7 +41,9 @@ public class DishService {
         final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
         Dish dish = dishMapper.toDish(dishCreate);
         dish.restaurant = restaurant;
+        restaurant.dishes.add(dish);
         dishRepository.persist(dish);
+        restaurantRepository.persist(restaurant);
         return dishMapper.toDishRead(dish);
     }
 
@@ -58,8 +60,7 @@ public class DishService {
 
     @Transactional(REQUIRED)
     public DishRead update(final UUID restaurantId, final UUID dishId, final DishUpdate dishUpdate) {
-        restaurantRepository.readByIdOptional(restaurantId);
-        final Dish dish = dishRepository.readByIdOptional(dishId);
+        final Dish dish = dishRepository.readByIdOptional(restaurantId, dishId);
         dishMapper.toDish(dishUpdate, dish);
         dishRepository.persist(dish);
         return dishMapper.toDishRead(dish);
@@ -67,8 +68,7 @@ public class DishService {
 
     @Transactional(REQUIRED)
     public void delete(final UUID restaurantId, final UUID dishId) {
-        restaurantRepository.readByIdOptional(restaurantId);
-        final Dish dish = dishRepository.readByIdOptional(dishId);
+        final Dish dish = dishRepository.readByIdOptional(restaurantId, dishId);
         dishRepository.delete(dish);
     }
 }

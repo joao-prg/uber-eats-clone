@@ -5,23 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.Instant;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -49,18 +44,28 @@ public class Restaurant {
     public String name;
 
     @OneToOne(
+            mappedBy = "restaurant",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
+    @PrimaryKeyJoinColumn
     @Valid
     public Address address;
 
     @Column(name = "created_at")
-    @PastOrPresent
+    @CreationTimestamp
     public Instant createdAt;
 
     @Column(name = "updated_at")
-    @PastOrPresent
+    @UpdateTimestamp
     public Instant updatedAt;
+
+    @OneToMany(
+            mappedBy="restaurant",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
+    public Set<@Valid Dish> dishes;
 }

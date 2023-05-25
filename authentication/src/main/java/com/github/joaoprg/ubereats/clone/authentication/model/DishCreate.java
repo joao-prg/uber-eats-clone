@@ -16,16 +16,36 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@Schema(
+        description = "The dish to be created.",
+        writeOnly = true
+)
 public class DishCreate {
 
+    @Schema(
+            required = true,
+            description = "Name of the dish.",
+            example = "Shrimp fried rice.",
+            maxLength = 50
+    )
     @NotNull(message = "Name cannot be null")
     @Size(max = 50)
     public String name;
 
+    @Schema(
+            description = "Description of the dish.",
+            example = "Vietnamese shrimp fried with basmati rice.",
+            maxLength = 200
+    )
     @Size(max = 200)
     public String description;
 
+    @Schema(
+            required = true,
+            description = "Price of the dish.",
+            example = "5.50",
+            minimum = "0"
+    )
     @PositiveOrZero
     public Double price;
 }

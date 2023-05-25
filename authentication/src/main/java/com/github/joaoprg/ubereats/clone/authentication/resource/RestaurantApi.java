@@ -1,5 +1,7 @@
 package com.github.joaoprg.ubereats.clone.authentication.resource;
 
+import com.github.joaoprg.ubereats.clone.authentication.model.DishCreate;
+import com.github.joaoprg.ubereats.clone.authentication.model.DishUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantCreate;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantUpdate;
 import io.smallrye.common.constraint.NotNull;
@@ -89,7 +91,7 @@ public interface RestaurantApi {
                             schema = @Schema(ref = "error"))
             )
     })
-    Response create(
+    Response createRestaurant(
             @NotNull
             @Valid
             final RestaurantCreate restaurantCreate);
@@ -143,7 +145,7 @@ public interface RestaurantApi {
                             schema = @Schema(ref = "error"))
             )
     })
-    Response readAll();
+    Response readAllRestaurants();
 
     @PUT
     @Path("/{restaurant_id}")
@@ -217,7 +219,7 @@ public interface RestaurantApi {
                     )
             )
     })
-    Response update(
+    Response updateRestaurant(
             @Parameter(
                     name = "restaurant_id",
                     description = "The restaurant id.",
@@ -280,7 +282,7 @@ public interface RestaurantApi {
                     )
             )
     })
-    Response delete(
+    Response deleteRestaurant(
             @Parameter(
             name = "restaurant_id",
             description = "The restaurant id.",
@@ -291,4 +293,360 @@ public interface RestaurantApi {
             )
             @PathParam("restaurant_id")
             final UUID restaurantId);
+
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{restaurant_id}/dishes")
+    @Operation(
+            operationId = "CreateDish",
+            summary = "Create a new dish."
+    )
+    @RequestBody(
+            name = "dishCreate",
+            description = "The dish to create.",
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON,
+                    schema = @Schema(ref = "dish_create")
+            ),
+            required = true
+    )
+    @APIResponses(value = {
+            @APIResponse(
+                    name = "dishRead",
+                    responseCode = "201",
+                    description = "Information on the dish that was created.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "dish_read"))
+            ),
+            @APIResponse(
+                    name = "badRequest",
+                    responseCode = "400",
+                    description = "Bad Request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "unauthorized",
+                    responseCode = "401",
+                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "forbidden",
+                    responseCode = "403",
+                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "internalError",
+                    responseCode = "500",
+                    description = "Internal Server Error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            )
+    })
+    Response createDish(
+            @Parameter(
+                    name = "restaurant_id",
+                    description = "The restaurant id.",
+                    required = true,
+                    example = "24e0bbea-2f5a-4061-a32b-2b2ad2ba3b22",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(description = "uuid", type = SchemaType.STRING)
+            )
+            @PathParam("restaurant_id")
+            final UUID restaurantId,
+            @NotNull
+            @Valid
+            final DishCreate dishCreate);
+
+    @GET
+    @Path("/dishes")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "ReadAllDishes",
+            summary = "Get a list of all dishes."
+    )
+    @APIResponses(value = {
+            @APIResponse(
+                    name = "dishList",
+                    responseCode = "200",
+                    description = "List of dishes found.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "dishes_list"))
+            ),
+            @APIResponse(
+                    name = "badRequest",
+                    responseCode = "400",
+                    description = "Bad Request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "unauthorized",
+                    responseCode = "401",
+                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "forbidden",
+                    responseCode = "403",
+                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "internalError",
+                    responseCode = "500",
+                    description = "Internal Server Error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            )
+    })
+    Response readAllDishes();
+
+
+    @GET
+    @Path("/{restaurant_id}/dishes")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "ReadDishesByRestaurant",
+            summary = "Get a list of all dishes of a restaurant."
+    )
+    @APIResponses(value = {
+            @APIResponse(
+                    name = "dishListByRestaurant",
+                    responseCode = "200",
+                    description = "List of dishes found for a given restaurant.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "dishes_list"))
+            ),
+            @APIResponse(
+                    name = "badRequest",
+                    responseCode = "400",
+                    description = "Bad Request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "unauthorized",
+                    responseCode = "401",
+                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "forbidden",
+                    responseCode = "403",
+                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            ),
+            @APIResponse(
+                    name = "internalError",
+                    responseCode = "500",
+                    description = "Internal Server Error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error"))
+            )
+    })
+    Response readDishesByRestaurant(
+            @Parameter(
+                    name = "restaurant_id",
+                    description = "The restaurant id.",
+                    required = true,
+                    example = "24e0bbea-2f5a-4061-a32b-2b2ad2ba3b22",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(description = "uuid", type = SchemaType.STRING)
+            )
+            @PathParam("restaurant_id")
+            final UUID restaurantId);
+
+
+    @PUT
+    @Path("/{restaurant_id}/dishes/{dish_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "UpdateDish",
+            summary = "Update a dish."
+    )
+    @RequestBody(
+            name = "DishUpdate",
+            description = "Data to update a dish with.",
+            content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON,
+                    schema = @Schema(ref = "dish_update")
+            ),
+            required = true
+    )
+    @APIResponses(value = {
+            @APIResponse(
+                    name = "dishRead",
+                    responseCode = "200",
+                    description = "Information on the dish that was updated.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "dish_read"))
+            ),
+            @APIResponse(
+                    name = "badRequest",
+                    responseCode = "400",
+                    description = "Bad Request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            ),
+            @APIResponse(
+                    name = "unauthorized",
+                    responseCode = "401",
+                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            ),
+            @APIResponse(
+                    name = "forbidden",
+                    responseCode = "403",
+                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            ),
+            @APIResponse(
+                    name = "notFound",
+                    responseCode = "404",
+                    description = "Dish Not Found.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            ),
+            @APIResponse(
+                    name = "internalError",
+                    responseCode = "500",
+                    description = "Internal Server Error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            )
+    })
+    Response updateDish(
+            @Parameter(
+                    name = "restaurant_id",
+                    description = "The restaurant id.",
+                    required = true,
+                    example = "24e0bbea-2f5a-4061-a32b-2b2ad2ba3b22",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(description = "uuid", type = SchemaType.STRING)
+            )
+            @PathParam("restaurant_id")
+            final UUID restaurantId,
+            @Parameter(
+                    name = "dish_id",
+                    description = "The dish id.",
+                    required = true,
+                    example = "7089a5b2-f7a2-4629-bffe-a5fd88dcb2e2",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(description = "uuid", type = SchemaType.STRING)
+            )
+            @PathParam("dish_id")
+            final UUID dishId,
+            @NotNull
+            @Valid
+            final DishUpdate dishUpdate);
+
+    @DELETE
+    @Path("/{restaurant_id}/dishes/{dish_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            summary = "Delete a dish."
+    )
+    @APIResponses(value = {
+            @APIResponse(
+                    description = "Dish successfully deleted.",
+                    responseCode = "204"
+            ),
+            @APIResponse(
+                    name = "unauthorized",
+                    responseCode = "401",
+                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            ),
+            @APIResponse(
+                    name = "forbidden",
+                    responseCode = "403",
+                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            ),
+            @APIResponse(
+                    name = "notFound",
+                    responseCode = "404",
+                    description = "Dish Not Found.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            ),
+            @APIResponse(
+                    name = "internalError",
+                    responseCode = "500",
+                    description = "Internal Server Error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "error")
+                    )
+            )
+    })
+    Response deleteDish(
+            @Parameter(
+                    name = "restaurant_id",
+                    description = "The restaurant id.",
+                    required = true,
+                    example = "24e0bbea-2f5a-4061-a32b-2b2ad2ba3b22",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(description = "uuid", type = SchemaType.STRING)
+            )
+            @PathParam("restaurant_id")
+            final UUID restaurantId,
+            @Parameter(
+                    name = "dish_id",
+                    description = "The dish id.",
+                    required = true,
+                    example = "7089a5b2-f7a2-4629-bffe-a5fd88dcb2e2",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(description = "uuid", type = SchemaType.STRING)
+            )
+            @PathParam("dish_id")
+            final UUID dishId);
 }

@@ -5,13 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -27,10 +27,7 @@ import java.util.UUID;
 public class Address {
 
     @Id
-    @Column(name = "address_id", columnDefinition = "uuid")
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @GenericGenerator(name = "uuid", strategy = "uuid4")
-    @GeneratedValue(generator = "uuid")
+    @Column(name = "restaurant_id")
     private UUID id;
 
     @NotNull(message = "Latitude cannot be null")
@@ -38,4 +35,9 @@ public class Address {
 
     @NotNull(message = "Longitude cannot be null")
     public Double longitude;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    public Restaurant restaurant;
 }

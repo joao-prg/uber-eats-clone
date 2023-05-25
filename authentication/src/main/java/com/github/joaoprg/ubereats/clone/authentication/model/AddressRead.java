@@ -14,12 +14,22 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@Schema(description = "The address to be read.")
 public class AddressRead {
 
+    @Schema(
+            required = true,
+            description = "Latitude of the given address.",
+            example = "38.7223"
+    )
     @NotNull(message = "Latitude cannot be null")
     public Double latitude;
 
+    @Schema(
+            required = true,
+            description = "Longitude of the given address.",
+            example = "9.1393"
+    )
     @NotNull(message = "Longitude cannot be null")
     public Double longitude;
 }
