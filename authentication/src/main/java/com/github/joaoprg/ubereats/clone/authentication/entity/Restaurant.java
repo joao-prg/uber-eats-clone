@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.Instant;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
@@ -39,6 +39,7 @@ public class Restaurant {
     @NotBlank(message = "Owner cannot be blank")
     public String owner;
 
+    @Column(unique = true)
     @NotNull(message = "Name cannot be null")
     @Size(max = 50)
     public String name;
@@ -53,13 +54,15 @@ public class Restaurant {
     @Valid
     public Address address;
 
-    @Column(name = "created_at")
     @CreationTimestamp
-    public Instant createdAt;
+    @Column(name = "created_at", updatable = false)
+    @Temporal(TemporalType.DATE)
+    public Date createdAt;
 
-    @Column(name = "updated_at")
     @UpdateTimestamp
-    public Instant updatedAt;
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.DATE)
+    public Date updatedAt;
 
     @OneToMany(
             mappedBy="restaurant",

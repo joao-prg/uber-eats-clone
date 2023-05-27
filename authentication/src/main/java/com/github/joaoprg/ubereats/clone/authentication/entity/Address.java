@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
 @EqualsAndHashCode(of = {"id"})
 
 @Entity
-@Table(name = "address")
+@Table(name = "address", uniqueConstraints = { @UniqueConstraint(columnNames = { "latitude", "longitude" }) })
 public class Address {
 
     @Id

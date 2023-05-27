@@ -14,6 +14,7 @@ public class RestaurantRepository implements PanacheRepositoryBase<Restaurant, U
 
     public Restaurant create(final Restaurant restaurant) {
         persist(restaurant);
+        getEntityManager().flush();
         return restaurant;
     }
 
