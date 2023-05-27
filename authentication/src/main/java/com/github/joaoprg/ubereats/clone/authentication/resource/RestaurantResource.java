@@ -99,4 +99,5 @@ public class RestaurantResource implements RestaurantApi{
                                @Context UriInfo uriInfo) {
         dishService.delete(restaurantId, dishId);
         return Response.noContent().build();
+    }
 }
