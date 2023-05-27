@@ -1,8 +1,10 @@
 package com.github.joaoprg.ubereats.clone.authentication.resource;
 
 import com.github.joaoprg.ubereats.clone.authentication.model.DishCreate;
+import com.github.joaoprg.ubereats.clone.authentication.model.DishRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantCreate;
+import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantUpdate;
 import io.smallrye.common.constraint.NotNull;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -15,7 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.jboss.resteasy.spi.HttpRequest;
+import org.hibernate.service.spi.ServiceException;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -48,7 +50,7 @@ public interface RestaurantApi {
             description = "The restaurant to create.",
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(ref = "restaurant_create")
+                    schema = @Schema(implementation = RestaurantCreate.class)
             ),
             required = true
     )
@@ -59,7 +61,7 @@ public interface RestaurantApi {
                     description = "Information on the restaurant that was created.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "knowledge_base_read"))
+                            schema = @Schema(implementation = RestaurantRead.class))
             ),
             @APIResponse(
                     name = "badRequest",
@@ -67,7 +69,7 @@ public interface RestaurantApi {
                     description = "Bad Request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "unauthorized",
@@ -75,7 +77,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "forbidden",
@@ -83,7 +85,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "internalError",
@@ -91,7 +93,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             )
     })
     Response createRestaurant(
@@ -122,7 +124,7 @@ public interface RestaurantApi {
                     description = "Bad Request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "unauthorized",
@@ -130,7 +132,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "forbidden",
@@ -138,7 +140,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "internalError",
@@ -146,7 +148,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             )
     })
     Response readAllRestaurants(@Context UriInfo uriInfo);
@@ -164,7 +166,7 @@ public interface RestaurantApi {
             description = "Data to update a restaurant with.",
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(ref = "restaurant_update")
+                    schema = @Schema(implementation = RestaurantUpdate.class)
             ),
             required = true
     )
@@ -175,7 +177,7 @@ public interface RestaurantApi {
                     description = "Information on the restaurant that was updated.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "restaurant_read"))
+                            schema = @Schema(implementation = RestaurantRead.class))
             ),
             @APIResponse(
                     name = "badRequest",
@@ -183,7 +185,7 @@ public interface RestaurantApi {
                     description = "Bad Request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -192,7 +194,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -201,7 +203,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -210,7 +212,7 @@ public interface RestaurantApi {
                     description = "Restaurant Not Found.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -219,7 +221,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             )
     })
@@ -256,7 +258,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -265,7 +267,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -274,7 +276,7 @@ public interface RestaurantApi {
                     description = "Restaurant Not Found.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -283,7 +285,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             )
     })
@@ -314,7 +316,7 @@ public interface RestaurantApi {
             description = "The dish to create.",
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(ref = "dish_create")
+                    schema = @Schema(implementation = DishCreate.class)
             ),
             required = true
     )
@@ -325,7 +327,7 @@ public interface RestaurantApi {
                     description = "Information on the dish that was created.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "dish_read"))
+                            schema = @Schema(implementation = DishRead.class))
             ),
             @APIResponse(
                     name = "badRequest",
@@ -333,7 +335,7 @@ public interface RestaurantApi {
                     description = "Bad Request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "unauthorized",
@@ -341,7 +343,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "forbidden",
@@ -349,7 +351,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "internalError",
@@ -357,7 +359,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             )
     })
     Response createDish(
@@ -398,7 +400,7 @@ public interface RestaurantApi {
                     description = "Bad Request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "unauthorized",
@@ -406,7 +408,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "forbidden",
@@ -414,7 +416,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "internalError",
@@ -422,7 +424,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             )
     })
     Response readAllDishes(@Context UriInfo uriInfo);
@@ -450,7 +452,7 @@ public interface RestaurantApi {
                     description = "Bad Request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "unauthorized",
@@ -458,7 +460,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "forbidden",
@@ -466,7 +468,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             ),
             @APIResponse(
                     name = "internalError",
@@ -474,7 +476,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error"))
+                            schema = @Schema(implementation = ServiceException.class))
             )
     })
     Response readDishesByRestaurant(
@@ -504,7 +506,7 @@ public interface RestaurantApi {
             description = "Data to update a dish with.",
             content = @Content(
                     mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(ref = "dish_update")
+                    schema = @Schema(implementation = DishUpdate.class)
             ),
             required = true
     )
@@ -515,7 +517,7 @@ public interface RestaurantApi {
                     description = "Information on the dish that was updated.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "dish_read"))
+                            schema = @Schema(implementation = DishRead.class))
             ),
             @APIResponse(
                     name = "badRequest",
@@ -523,7 +525,7 @@ public interface RestaurantApi {
                     description = "Bad Request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -532,7 +534,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -541,7 +543,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -550,7 +552,7 @@ public interface RestaurantApi {
                     description = "Dish Not Found.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -559,7 +561,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             )
     })
@@ -606,7 +608,7 @@ public interface RestaurantApi {
                     description = "Unauthorized access - invalid or unverifiable JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -615,7 +617,7 @@ public interface RestaurantApi {
                     description = "Forbidden access - can't find the required scope in the JWT.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -624,7 +626,7 @@ public interface RestaurantApi {
                     description = "Dish Not Found.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             ),
             @APIResponse(
@@ -633,7 +635,7 @@ public interface RestaurantApi {
                     description = "Internal Server Error.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "error")
+                            schema = @Schema(implementation = ServiceException.class)
                     )
             )
     })
