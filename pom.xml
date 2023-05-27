@@ -21,6 +21,8 @@
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <lombok.version>1.18.26</lombok.version>
         <dependency.version.quarkus>2.16.6.Final</dependency.version.quarkus>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>

@@ -32,7 +32,7 @@ public class Restaurant {
     @Id
     @Column(name = "restaurant_id", columnDefinition = "uuid")
     @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @GenericGenerator(name = "uuid", strategy = "uuid4")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @GeneratedValue(generator = "uuid")
     private UUID id;
 

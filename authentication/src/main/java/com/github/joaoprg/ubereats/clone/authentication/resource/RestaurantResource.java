@@ -36,8 +36,7 @@ public class RestaurantResource implements RestaurantApi{
 
 
     @Override
-    public Response createRestaurant(@NotNull @Valid RestaurantCreate restaurantCreate,
-                                     @Context UriInfo uriInfo) {
+    public Response createRestaurant(RestaurantCreate restaurantCreate, @Context UriInfo uriInfo) {
         final RestaurantRead restaurantRead = restaurantService.create(restaurantCreate);
         final URI uri = uriInfo.getAbsolutePathBuilder().path(restaurantRead.getId().toString()).build();
         return Response.created(uri).entity(restaurantRead).build();
@@ -50,7 +49,7 @@ public class RestaurantResource implements RestaurantApi{
 
     @Override
     public Response updateRestaurant(@PathParam("restaurant_id") UUID restaurantId,
-                                     @NotNull @Valid RestaurantUpdate restaurantUpdate,
+                                     RestaurantUpdate restaurantUpdate,
                                      @Context UriInfo uriInfo) {
         final RestaurantRead restaurantRead = restaurantService.update(restaurantId, restaurantUpdate);
         return Response.ok(uriInfo.getAbsolutePath()).entity(restaurantRead).build();
@@ -65,7 +64,7 @@ public class RestaurantResource implements RestaurantApi{
 
     @Override
     public Response createDish(@PathParam("restaurant_id") UUID restaurantId,
-                               @NotNull @Valid DishCreate dishCreate,
+                               DishCreate dishCreate,
                                @Context UriInfo uriInfo) {
         final DishRead dishRead = dishService.create(restaurantId, dishCreate);
         final URI uri = uriInfo.getAbsolutePathBuilder().path(dishRead.getId().toString()).build();
@@ -87,7 +86,7 @@ public class RestaurantResource implements RestaurantApi{
     @Override
     public Response updateDish(@PathParam("restaurant_id") UUID restaurantId,
                                @PathParam("dish_id") UUID dishId,
-                               @NotNull @Valid DishUpdate dishUpdate,
+                               DishUpdate dishUpdate,
                                @Context UriInfo uriInfo) {
         final DishRead dishRead = dishService.update(restaurantId, dishId, dishUpdate);
         return Response.ok(uriInfo.getAbsolutePath()).entity(dishRead).build();

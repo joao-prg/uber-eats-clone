@@ -29,7 +29,7 @@ public class Dish {
     @Id
     @Column(name = "dish_id", columnDefinition = "uuid")
     @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @GenericGenerator(name = "uuid", strategy = "uuid4")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @GeneratedValue(generator = "uuid")
     private UUID id;
 
