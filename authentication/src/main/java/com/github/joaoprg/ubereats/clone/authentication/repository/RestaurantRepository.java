@@ -12,6 +12,11 @@ import java.util.UUID;
 @Transactional
 public class RestaurantRepository implements PanacheRepositoryBase<Restaurant, UUID> {
 
+    public Restaurant create(final Restaurant restaurant) {
+        persist(restaurant);
+        return restaurant;
+    }
+
     public Restaurant readByIdOptional(final UUID restaurantId) {
         return this.findByIdOptional(restaurantId)
                 .orElseThrow(() -> new NotFoundException(

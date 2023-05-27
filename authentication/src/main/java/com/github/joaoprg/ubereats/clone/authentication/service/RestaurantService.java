@@ -40,7 +40,8 @@ public class RestaurantService {
         log.debug(String.format("Creating restaurant...[Name: %s]", restaurantCreate.name));
         try {
             Restaurant restaurant = restaurantMapper.toRestaurant(restaurantCreate);
-            restaurantRepository.persist(restaurant);
+            restaurant.getAddress().setRestaurant(restaurant);
+            restaurant = restaurantRepository.create(restaurant);
             return restaurantMapper.toRestaurantRead(restaurant);
         } catch (Exception e) {
             if (e instanceof NotFoundException) {
