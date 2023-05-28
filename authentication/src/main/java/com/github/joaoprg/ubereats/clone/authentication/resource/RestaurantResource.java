@@ -8,16 +8,19 @@ import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.service.DishService;
 import com.github.joaoprg.ubereats.clone.authentication.service.RestaurantService;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
 
 public class RestaurantResource implements RestaurantApi{
@@ -43,8 +46,11 @@ public class RestaurantResource implements RestaurantApi{
     }
 
     @Override
-    public Response readAllRestaurants(@Context UriInfo uriInfo) {
-        return Response.ok(restaurantService.readAll()).build();
+    public Response readRestaurants(
+            @QueryParam("page") final Integer page,
+            @QueryParam("per_page") final Integer perPage,
+            @Context UriInfo uriInfo) {
+        return Response.ok(restaurantService.read(page, perPage)).build();
     }
 
     @Override
@@ -72,15 +78,20 @@ public class RestaurantResource implements RestaurantApi{
     }
 
     @Override
-    public Response readAllDishes(@Context UriInfo uriInfo) {
-        return Response.ok(dishService.readAll()).build();
+    public Response readDishes(
+            @QueryParam("page") final Integer page,
+            @QueryParam("per_page") final Integer perPage,
+            @Context UriInfo uriInfo) {
+        return Response.ok(dishService.read(page, perPage)).build();
     }
 
     @Override
-    public Response readDishesByRestaurant(@PathParam("restaurant_id") UUID restaurantId,
-                                           @Context UriInfo uriInfo) {
-        final List<DishRead> dishes = dishService.readByRestaurant(restaurantId);
-        return Response.ok(dishes).build();
+    public Response readDishesByRestaurant(
+            @PathParam("restaurant_id") UUID restaurantId,
+            @QueryParam("page") final Integer page,
+            @QueryParam("per_page") final Integer perPage,
+            @Context UriInfo uriInfo) {
+        return Response.ok(dishService.readByRestaurant(restaurantId, page, perPage)).build();
     }
 
     @Override

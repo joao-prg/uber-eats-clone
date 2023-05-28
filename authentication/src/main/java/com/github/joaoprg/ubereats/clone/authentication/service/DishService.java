@@ -5,6 +5,8 @@ import com.github.joaoprg.ubereats.clone.authentication.entity.Restaurant;
 import com.github.joaoprg.ubereats.clone.authentication.exception.ServiceException;
 import com.github.joaoprg.ubereats.clone.authentication.mapper.DishMapper;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishCreate;
+import com.github.joaoprg.ubereats.clone.authentication.model.DishEmbeddedList;
+import com.github.joaoprg.ubereats.clone.authentication.model.DishList;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.repository.DishRepository;
@@ -60,22 +62,42 @@ public class DishService {
         }
     }
 
-    public List<DishRead> readAll() {
-        log.debug("Reading all dishes...");
+    public DishList read(final int page, final int perPage) {
+        log.debug("Reading dishes...");
         try {
-            List<Dish> dishes = dishRepository.listAll();
-            return dishes.stream().map(dishMapper::toDishRead).collect(Collectors.toList());
+            List<DishRead> dishReadList = dishRepository.findAll()
+                    .page(page - 1, perPage)
+                    .stream()
+                    .map(dishMapper::toDishRead)
+                    .toList();
+            return DishList.builder()
+                    .total((int) dishRepository.count())
+                    .count(dishReadList.size())
+                    .page(page)
+                    .perPage(perPage)
+                    .dishEmbeddedList(new DishEmbeddedList(dishReadList))
+                    .build();
         } catch (Exception e) {
             throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
         }
     }
 
-    public List<DishRead> readByRestaurant(final UUID restaurantId) {
+    public DishList readByRestaurant(final UUID restaurantId, final int page, final int perPage) {
         log.debug(String.format("Reading all dishes for restaurant [Restaurant Id: %s]", restaurantId));
         try {
             restaurantRepository.readByIdOptional(restaurantId);
-            List<Dish> dishes = dishRepository.readByRestaurant(restaurantId);
-            return dishes.stream().map(dishMapper::toDishRead).collect(Collectors.toList());
+            List<DishRead> dishReadList = dishRepository.find("restaurantId", restaurantId)
+                    .page(page - 1, perPage)
+                    .stream()
+                    .map(dishMapper::toDishRead)
+                    .toList();
+            return DishList.builder()
+                    .total((int) dishRepository.count("restaurantId", restaurantId))
+                    .count(dishReadList.size())
+                    .page(page)
+                    .perPage(perPage)
+                    .dishEmbeddedList(new DishEmbeddedList(dishReadList))
+                    .build();
         } catch (Exception e) {
             if (e instanceof NotFoundException) {
                 throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);

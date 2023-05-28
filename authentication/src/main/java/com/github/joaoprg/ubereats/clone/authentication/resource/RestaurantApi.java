@@ -1,9 +1,11 @@
 package com.github.joaoprg.ubereats.clone.authentication.resource;
 
 import com.github.joaoprg.ubereats.clone.authentication.model.DishCreate;
+import com.github.joaoprg.ubereats.clone.authentication.model.DishList;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantCreate;
+import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantList;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantUpdate;
 import io.smallrye.common.constraint.NotNull;
@@ -28,6 +30,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -116,7 +119,7 @@ public interface RestaurantApi {
                     description = "List of restaurants found.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "restaurants_list"))
+                            schema = @Schema(implementation = RestaurantList.class))
             ),
             @APIResponse(
                     name = "badRequest",
@@ -151,7 +154,35 @@ public interface RestaurantApi {
                             schema = @Schema(implementation = ServiceException.class))
             )
     })
-    Response readAllRestaurants(@Context UriInfo uriInfo);
+    Response readRestaurants(
+            @Parameter(
+                    name = "page",
+                    description = "The page requested.",
+                    example = "1",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(
+                            type = SchemaType.INTEGER,
+                            defaultValue = "1",
+                            minimum = "1"
+                    )
+            )
+            @QueryParam("page")
+            Integer page,
+            @Parameter(
+                    name = "per_page",
+                    description = "The maximum amount of dishes to be returned per page.",
+                    example = "50",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(
+                            type = SchemaType.INTEGER,
+                            defaultValue = "50",
+                            minimum = "1",
+                            maximum = "200"
+                    )
+            )
+            @QueryParam("per_page")
+            Integer perPage,
+            @Context UriInfo uriInfo);
 
     @PUT
     @Path("/{restaurant_id}")
@@ -392,7 +423,7 @@ public interface RestaurantApi {
                     description = "List of dishes found.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "dishes_list"))
+                            schema = @Schema(implementation = DishList.class))
             ),
             @APIResponse(
                     name = "badRequest",
@@ -427,7 +458,35 @@ public interface RestaurantApi {
                             schema = @Schema(implementation = ServiceException.class))
             )
     })
-    Response readAllDishes(@Context UriInfo uriInfo);
+    Response readDishes(
+            @Parameter(
+                    name = "page",
+                    description = "The page requested.",
+                    example = "1",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(
+                            type = SchemaType.INTEGER,
+                            defaultValue = "1",
+                            minimum = "1"
+                    )
+            )
+            @QueryParam("page")
+            Integer page,
+            @Parameter(
+                    name = "per_page",
+                    description = "The maximum amount of dishes to be returned per page.",
+                    example = "50",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(
+                            type = SchemaType.INTEGER,
+                            defaultValue = "50",
+                            minimum = "1",
+                            maximum = "200"
+                    )
+            )
+            @QueryParam("per_page")
+            Integer perPage,
+            @Context UriInfo uriInfo);
 
 
     @GET
@@ -444,7 +503,7 @@ public interface RestaurantApi {
                     description = "List of dishes found for a given restaurant.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "dishes_list"))
+                            schema = @Schema(implementation = DishList.class))
             ),
             @APIResponse(
                     name = "badRequest",
@@ -490,6 +549,33 @@ public interface RestaurantApi {
             )
             @PathParam("restaurant_id")
             final UUID restaurantId,
+            @Parameter(
+                    name = "page",
+                    description = "The page requested.",
+                    example = "1",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(
+                            type = SchemaType.INTEGER,
+                            defaultValue = "1",
+                            minimum = "1"
+                    )
+            )
+            @QueryParam("page")
+            Integer page,
+            @Parameter(
+                    name = "per_page",
+                    description = "The maximum amount of dishes to be returned per page.",
+                    example = "50",
+                    in = ParameterIn.QUERY,
+                    schema = @Schema(
+                            type = SchemaType.INTEGER,
+                            defaultValue = "50",
+                            minimum = "1",
+                            maximum = "200"
+                    )
+            )
+            @QueryParam("per_page")
+            Integer perPage,
             @Context UriInfo uriInfo);
 
 

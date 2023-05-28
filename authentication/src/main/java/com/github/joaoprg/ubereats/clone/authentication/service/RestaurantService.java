@@ -4,6 +4,8 @@ import com.github.joaoprg.ubereats.clone.authentication.entity.Restaurant;
 import com.github.joaoprg.ubereats.clone.authentication.exception.ServiceException;
 import com.github.joaoprg.ubereats.clone.authentication.mapper.RestaurantMapper;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantCreate;
+import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantEmbeddedList;
+import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantList;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantRead;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantUpdate;
 import com.github.joaoprg.ubereats.clone.authentication.repository.RestaurantRepository;
@@ -16,7 +18,6 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 
@@ -51,11 +52,21 @@ public class RestaurantService {
         }
     }
 
-    public List<RestaurantRead> readAll() {
-        log.debug("Reading all restaurants...");
+    public RestaurantList read(final int page, final int perPage) {
+        log.debug("Reading restaurants...");
         try {
-            List<Restaurant> restaurants = restaurantRepository.listAll();
-            return restaurants.stream().map(restaurantMapper::toRestaurantRead).collect(Collectors.toList());
+            List<RestaurantRead> restaurantReadList = restaurantRepository.findAll()
+                    .page(page - 1, perPage)
+                    .stream()
+                    .map(restaurantMapper::toRestaurantRead)
+                    .toList();
+            return RestaurantList.builder()
+                    .total((int) restaurantRepository.count())
+                    .count(restaurantReadList.size())
+                    .page(page)
+                    .perPage(perPage)
+                    .restaurantEmbeddedList(new RestaurantEmbeddedList(restaurantReadList))
+                    .build();
         } catch (Exception e) {
             throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
         }
