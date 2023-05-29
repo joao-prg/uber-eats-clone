@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+import javax.json.bind.annotation.JsonbProperty;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
@@ -49,11 +50,12 @@ public class DishRead {
 
     @Schema(
             required = true,
-            description = "Information about the restaurant."
+            description = "The restaurant identifier.",
+            example = "f67e429c-ddf3-427f-8503-7afee054ae14"
     )
-    @NotNull(message = "Restaurant cannot be null")
-    @Valid
-    public RestaurantRead restaurant;
+    @NotNull(message = "Restaurant Id cannot be null")
+    @JsonbProperty("restaurant_id")
+    public UUID restaurantId;
 
     @Schema(
             required = true,

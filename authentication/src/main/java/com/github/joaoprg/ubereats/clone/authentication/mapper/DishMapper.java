@@ -15,6 +15,7 @@ public interface DishMapper {
     @Mapping(target = "restaurant", ignore = true)
     Dish toDish(DishCreate dishCreate);
 
+    @Mapping(target = "restaurantId", source = "restaurant.id")
     DishRead toDishRead(Dish dish);
 
     @Mapping(target = "name", ignore = true)

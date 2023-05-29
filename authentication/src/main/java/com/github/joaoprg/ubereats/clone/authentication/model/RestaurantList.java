@@ -27,17 +27,29 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
         readOnly = true
 )
 public class RestaurantList {
-    @Schema(description = "Total number of restaurants.")
+    @Schema(
+            description = "Total number of restaurants.",
+            example = "1"
+    )
     private int total;
 
-    @Schema(description = "Number of restaurants in the page.")
+    @Schema(
+            description = "Number of restaurants in the page.",
+            example = "1"
+    )
     private int count;
 
-    @Schema(description = "Page number.")
+    @Schema(
+            description = "Page number.",
+            example = "1"
+    )
     private int page;
 
     @JsonbProperty("per_page")
-    @Schema(description = "Number of restaurants per page.")
+    @Schema(
+            description = "Number of restaurants per page.",
+            example = "10"
+    )
     private int perPage;
 
     @JsonbProperty("_embedded")
