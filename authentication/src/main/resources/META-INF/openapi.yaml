@@ -1,0 +1,20 @@
+openapi: 3.0.1
+info:
+  title: Static OpenAPI document of restaurants resource
+  description: Restaurant resources Open API documentation
+  version: "0.1"
+components:
+  schemas:
+    Exception:
+      type: object
+      required:
+        - code
+        - message
+        - http_status_code
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        http_status_code:
+          type: integer

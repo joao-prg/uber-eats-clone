@@ -2,6 +2,7 @@ package com.github.joaoprg.ubereats.clone.authentication.service;
 
 import com.github.joaoprg.ubereats.clone.authentication.entity.Dish;
 import com.github.joaoprg.ubereats.clone.authentication.entity.Restaurant;
+import com.github.joaoprg.ubereats.clone.authentication.exception.ServiceErrorCode;
 import com.github.joaoprg.ubereats.clone.authentication.exception.ServiceException;
 import com.github.joaoprg.ubereats.clone.authentication.mapper.DishMapper;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishCreate;
@@ -17,10 +18,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 
@@ -54,32 +53,25 @@ public class DishService {
             dishRepository.persist(dish);
             restaurantRepository.persist(restaurant);
             return dishMapper.toDishRead(dish);
-        } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);
-            }
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
+        } catch (NotFoundException e) {
+            throw new ServiceException(e, ServiceErrorCode.RESTAURANT_NOT_FOUND);
         }
     }
 
     public DishList read(final int page, final int perPage) {
         log.debug("Reading dishes...");
-        try {
-            List<DishRead> dishReadList = dishRepository.findAll()
-                    .page(page - 1, perPage)
-                    .stream()
-                    .map(dishMapper::toDishRead)
-                    .toList();
-            return DishList.builder()
-                    .total((int) dishRepository.count())
-                    .count(dishReadList.size())
-                    .page(page)
-                    .perPage(perPage)
-                    .dishEmbeddedList(new DishEmbeddedList(dishReadList))
-                    .build();
-        } catch (Exception e) {
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
-        }
+        List<DishRead> dishReadList = dishRepository.findAll()
+                .page(page - 1, perPage)
+                .stream()
+                .map(dishMapper::toDishRead)
+                .toList();
+        return DishList.builder()
+                .total((int) dishRepository.count())
+                .count(dishReadList.size())
+                .page(page)
+                .perPage(perPage)
+                .dishEmbeddedList(new DishEmbeddedList(dishReadList))
+                .build();
     }
 
     public DishList readByRestaurant(final UUID restaurantId, final int page, final int perPage) {
@@ -98,11 +90,8 @@ public class DishService {
                     .perPage(perPage)
                     .dishEmbeddedList(new DishEmbeddedList(dishReadList))
                     .build();
-        } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);
-            }
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
+        } catch (NotFoundException e) {
+            throw new ServiceException(e, ServiceErrorCode.RESTAURANT_NOT_FOUND);
         }
     }
 
@@ -114,11 +103,8 @@ public class DishService {
             dishMapper.toDish(dishUpdate, dish);
             dishRepository.persist(dish);
             return dishMapper.toDishRead(dish);
-        } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);
-            }
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
+        } catch (NotFoundException e) {
+            throw new ServiceException(e, ServiceErrorCode.DISH_NOT_FOUND);
         }
     }
 
@@ -128,11 +114,8 @@ public class DishService {
         try {
             final Dish dish = dishRepository.readByIdOptional(restaurantId, dishId);
             dishRepository.delete(dish);
-        } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);
-            }
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
+        } catch (NotFoundException e) {
+            throw new ServiceException(e, ServiceErrorCode.RESTAURANT_NOT_FOUND);
         }
     }
 }

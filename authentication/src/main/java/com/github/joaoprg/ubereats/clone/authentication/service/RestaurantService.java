@@ -1,6 +1,7 @@
 package com.github.joaoprg.ubereats.clone.authentication.service;
 
 import com.github.joaoprg.ubereats.clone.authentication.entity.Restaurant;
+import com.github.joaoprg.ubereats.clone.authentication.exception.ServiceErrorCode;
 import com.github.joaoprg.ubereats.clone.authentication.exception.ServiceException;
 import com.github.joaoprg.ubereats.clone.authentication.mapper.RestaurantMapper;
 import com.github.joaoprg.ubereats.clone.authentication.model.RestaurantCreate;
@@ -39,37 +40,26 @@ public class RestaurantService {
     @Transactional(REQUIRED)
     public RestaurantRead create(final RestaurantCreate restaurantCreate) {
         log.debug(String.format("Creating restaurant...[Name: %s]", restaurantCreate.name));
-        try {
-            Restaurant restaurant = restaurantMapper.toRestaurant(restaurantCreate);
-            restaurant.getAddress().setRestaurant(restaurant);
-            restaurant = restaurantRepository.create(restaurant);
-            return restaurantMapper.toRestaurantRead(restaurant);
-        } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);
-            }
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
-        }
+        Restaurant restaurant = restaurantMapper.toRestaurant(restaurantCreate);
+        restaurant.getAddress().setRestaurant(restaurant);
+        restaurant = restaurantRepository.create(restaurant);
+        return restaurantMapper.toRestaurantRead(restaurant);
     }
 
     public RestaurantList read(final int page, final int perPage) {
         log.debug("Reading restaurants...");
-        try {
-            List<RestaurantRead> restaurantReadList = restaurantRepository.findAll()
-                    .page(page - 1, perPage)
-                    .stream()
-                    .map(restaurantMapper::toRestaurantRead)
-                    .toList();
-            return RestaurantList.builder()
-                    .total((int) restaurantRepository.count())
-                    .count(restaurantReadList.size())
-                    .page(page)
-                    .perPage(perPage)
-                    .restaurantEmbeddedList(new RestaurantEmbeddedList(restaurantReadList))
-                    .build();
-        } catch (Exception e) {
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
-        }
+        List<RestaurantRead> restaurantReadList = restaurantRepository.findAll()
+                .page(page - 1, perPage)
+                .stream()
+                .map(restaurantMapper::toRestaurantRead)
+                .toList();
+        return RestaurantList.builder()
+                .total((int) restaurantRepository.count())
+                .count(restaurantReadList.size())
+                .page(page)
+                .perPage(perPage)
+                .restaurantEmbeddedList(new RestaurantEmbeddedList(restaurantReadList))
+                .build();
     }
 
 
@@ -81,11 +71,8 @@ public class RestaurantService {
             restaurantMapper.toRestaurant(restaurantUpdate, restaurant);
             restaurantRepository.persist(restaurant);
             return restaurantMapper.toRestaurantRead(restaurant);
-        } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);
-            }
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
+        } catch (NotFoundException e) {
+            throw new ServiceException(e, ServiceErrorCode.RESTAURANT_NOT_FOUND);
         }
     }
 
@@ -95,11 +82,8 @@ public class RestaurantService {
         try {
             final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
             restaurantRepository.delete(restaurant);
-        } catch (Exception e) {
-            if (e instanceof NotFoundException) {
-                throw new ServiceException(Response.Status.NOT_FOUND.getStatusCode(), e);
-            }
-            throw new ServiceException(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), e);
+        } catch (NotFoundException e) {
+            throw new ServiceException(e, ServiceErrorCode.RESTAURANT_NOT_FOUND);
         }
     }
 }

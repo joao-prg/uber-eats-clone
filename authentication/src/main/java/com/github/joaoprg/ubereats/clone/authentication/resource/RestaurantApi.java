@@ -1,5 +1,6 @@
 package com.github.joaoprg.ubereats.clone.authentication.resource;
 
+import com.github.joaoprg.ubereats.clone.authentication.exception.ExceptionPayload;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishCreate;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishList;
 import com.github.joaoprg.ubereats.clone.authentication.model.DishRead;
@@ -197,7 +198,10 @@ public interface RestaurantApi {
                     name = "badRequest",
                     responseCode = "400",
                     description = "Bad Request.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "Exception")
+                    )
             ),
             @APIResponse(
                     name = "unauthorized",

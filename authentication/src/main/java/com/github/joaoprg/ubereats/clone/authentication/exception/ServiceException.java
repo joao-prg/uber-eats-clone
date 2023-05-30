@@ -9,35 +9,12 @@ import lombok.Setter;
 @Setter
 public class ServiceException extends RuntimeException {
 
-    private final String message;
-    private final int httpStatusCode;
-    private final String description;
-
-    public ServiceException(final String message, final int httpStatusCode) {
-        this(message, httpStatusCode, null);
-    }
+    private final ServiceErrorCode errorCode;
 
     public ServiceException(
-            final int httpStatusCode,
-            final Throwable cause) {
-
+            final Throwable cause,
+            final ServiceErrorCode errorCode) {
         super(cause);
-        this.message = null;
-        this.description = null;
-        this.httpStatusCode = httpStatusCode;
+        this.errorCode = errorCode;
     }
-
-
-    public ServiceException(
-            final String message,
-            final int httpStatusCode,
-            final String description,
-            final Throwable cause) {
-
-        super(cause);
-        this.message = message;
-        this.description = description;
-        this.httpStatusCode = httpStatusCode;
-    }
-
 }
