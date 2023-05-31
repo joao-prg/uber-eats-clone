@@ -3,4 +3,4 @@
 Future work:
 - Check OpenAPI docs
 - Exception handling (mapping from service to API)
-- Add Application and annotations
+- Add Application and API annotations

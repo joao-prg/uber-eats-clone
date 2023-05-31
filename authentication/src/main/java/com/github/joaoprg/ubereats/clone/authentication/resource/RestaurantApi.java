@@ -69,26 +69,42 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "badRequest",
                     responseCode = "400",
-                    description = "Bad Request.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Bad request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.BAD_REQUEST
+                    )
             ),
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response createRestaurant(
@@ -116,26 +132,42 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "badRequest",
                     responseCode = "400",
-                    description = "Bad Request.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Bad request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.BAD_REQUEST
+                    )
             ),
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response readRestaurants(
@@ -197,35 +229,52 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "badRequest",
                     responseCode = "400",
-                    description = "Bad Request.",
+                    description = "Bad request.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
-                            schema = @Schema(ref = "Exception")
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.BAD_REQUEST
                     )
             ),
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "notFound",
                     responseCode = "404",
-                    description = "Restaurant Not Found.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Restaurant not found.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.NOT_FOUND
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response updateRestaurant(
@@ -259,25 +308,41 @@ public interface RestaurantApi {
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "notFound",
                     responseCode = "404",
-                    description = "Restaurant Not Found.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Restaurant not found.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.NOT_FOUND
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response deleteRestaurant(
@@ -323,26 +388,42 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "badRequest",
                     responseCode = "400",
-                    description = "Bad Request.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Bad request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.BAD_REQUEST
+                    )
             ),
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response createDish(
@@ -380,26 +461,42 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "badRequest",
                     responseCode = "400",
-                    description = "Bad Request.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Bad request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.BAD_REQUEST
+                    )
             ),
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response readDishes(
@@ -452,26 +549,42 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "badRequest",
                     responseCode = "400",
-                    description = "Bad Request.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Bad request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.BAD_REQUEST
+                    )
             ),
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response readDishesByRestaurant(
@@ -544,32 +657,52 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "badRequest",
                     responseCode = "400",
-                    description = "Bad Request.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Bad request.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.BAD_REQUEST
+                    )
             ),
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "notFound",
                     responseCode = "404",
-                    description = "Dish Not Found.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Dish not found.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.NOT_FOUND
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response updateDish(
@@ -613,25 +746,41 @@ public interface RestaurantApi {
                     name = "unauthorized",
                     responseCode = "401",
                     description = "Unauthorized access - invalid or unverifiable JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.UNAUTHORIZED
+                    )
             ),
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
                     description = "Forbidden access - can't find the required scope in the JWT.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.FORBIDDEN
+                    )
             ),
             @APIResponse(
                     name = "notFound",
                     responseCode = "404",
-                    description = "Dish Not Found.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Dish not found.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.NOT_FOUND
+                    )
             ),
             @APIResponse(
                     name = "internalError",
                     responseCode = "500",
-                    description = "Internal Server Error.",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    description = "Internal server error.",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(implementation = ExceptionPayload.class),
+                            example = ApiResponseExampleConstants.INTERNAL_SERVER_ERROR
+                    )
             )
     })
     Response deleteDish(
