@@ -38,7 +38,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>authentication</module>
+        <module>register</module>
         <module>marketplace</module>
         <module>order</module>
     </modules>
