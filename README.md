@@ -1,5 +1,5 @@
 # uber-eats-clone
 
 Future work:
-- Exception handling (mapping from service to API)
-- Mudar implementation por ref no OpenAPI docs
+- ConstraintViolationExceptionMapper
+- Exception handling for authorization and authentication

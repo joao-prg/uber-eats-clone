@@ -9,6 +9,8 @@ import javax.ws.rs.core.Response;
 @AllArgsConstructor
 public enum ServiceErrorCode {
 
+    // 400
+    INVALID_INPUT("1040000", "Invalid input.", Response.Status.BAD_REQUEST.getStatusCode()),
     // 404
     RESTAURANT_NOT_FOUND("1040400", "Restaurant not found.", Response.Status.NOT_FOUND.getStatusCode()),
     DISH_NOT_FOUND("1040401", "Dish not found.", Response.Status.NOT_FOUND.getStatusCode()),
