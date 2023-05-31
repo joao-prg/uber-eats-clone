@@ -20,7 +20,8 @@ public class ServiceExceptionMapper implements ExceptionMapper<ServiceException>
                 .build();
         log.error("{} exception caught: {}", ServiceException.class.getName(), exceptionPayload, exception);
 
-        return Response.status(exception.getErrorCode().getHttpStatusCode())
+        return Response
+                .status(exception.getErrorCode().getHttpStatusCode())
                 .entity(exceptionPayload)
                 .build();
     }
