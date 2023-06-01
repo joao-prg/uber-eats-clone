@@ -14,6 +14,7 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "dish_update", description = "Dish information to be updated.")
 public class DishUpdate {
 
     @Schema(

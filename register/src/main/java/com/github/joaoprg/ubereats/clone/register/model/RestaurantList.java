@@ -21,6 +21,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
         "perPage",
         "restaurantEmbeddedList"
 })
+@Schema(name = "restaurant_list", description = "Page with list of restaurants.")
 public class RestaurantList {
     @Schema(
             description = "Total number of restaurants.",
@@ -48,6 +49,6 @@ public class RestaurantList {
     private int perPage;
 
     @JsonbProperty("_embedded")
-    @Schema(description = "The list of restaurants.")
+    @Schema(ref = "restaurant_embedded_list")
     private RestaurantEmbeddedList restaurantEmbeddedList;
 }

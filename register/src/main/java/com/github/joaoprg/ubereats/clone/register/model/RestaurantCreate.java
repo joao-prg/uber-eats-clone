@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "restaurant_create", description = "Information of restaurant to be created.")
 public class RestaurantCreate {
 
     @Schema(
@@ -39,10 +40,7 @@ public class RestaurantCreate {
     @Size(max = 50)
     public String name;
 
-    @Schema(
-            required = true,
-            description = "Address of the restaurant."
-    )
+    @Schema(required = true, ref = "address_read")
     @NotNull(message = "Address cannot be null")
     @Valid
     public AddressRead address;

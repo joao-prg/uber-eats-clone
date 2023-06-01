@@ -15,6 +15,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "restaurant_update", description = "Restaurant information to be updated.")
 public class RestaurantUpdate {
 
     @Schema(
@@ -34,7 +35,7 @@ public class RestaurantUpdate {
     @Size(max = 50)
     public String name;
 
-    @Schema(description = "Address of the restaurant.")
+    @Schema(ref = "address_read")
     @Valid
     public AddressRead address;
 }

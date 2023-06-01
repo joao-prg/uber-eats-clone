@@ -18,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "dish_read", description = "Dish information.")
 public class DishRead {
 
     @Schema(

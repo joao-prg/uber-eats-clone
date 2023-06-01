@@ -21,6 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "restaurant_read", description = "Restaurant information.")
 public class RestaurantRead {
 
     @Schema(
@@ -50,10 +51,7 @@ public class RestaurantRead {
     @Size(max = 50)
     public String name;
 
-    @Schema(
-            required = true,
-            description = "Address of the restaurant."
-    )
+    @Schema(required = true, ref = "address_read")
     @NotNull(message = "Address cannot be null")
     @Valid
     public AddressRead address;

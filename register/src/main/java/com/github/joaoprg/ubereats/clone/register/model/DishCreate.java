@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "dish_create", description = "Dish to be created.")
 public class DishCreate {
 
     @Schema(

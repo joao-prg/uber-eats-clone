@@ -17,10 +17,17 @@ import java.util.List;
 @AllArgsConstructor
 public class ExceptionPayload {
 
+    @Schema(description = "Exception code.", example = "1040000")
     private String code;
+
+    @Schema(description = "Exception message.", example = "Invalid input.")
     private String message;
+
+    @Schema(description = "Exception HTTP status code.", example = "400")
     @JsonbProperty("http_status_code")
     private int httpStatusCode;
+
+    @Schema(description = "Exception error fields.", ref = "field_exception")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<FieldException> fieldExceptions;
 
@@ -28,10 +35,14 @@ public class ExceptionPayload {
     @JsonAutoDetect
     @NoArgsConstructor
     @AllArgsConstructor
+    @Schema(name = "field_exception")
     public static class FieldException {
 
+        @Schema(description = "Field path.", example = "dishCreate.name")
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private String path;
+
+        @Schema(description = "Field exception message.", example = "Name cannot be null")
         private String message;
     }
 }

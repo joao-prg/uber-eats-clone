@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Schema(name = "address_read", description = "Address of the restaurant.")
 public class AddressRead {
 
     @Schema(

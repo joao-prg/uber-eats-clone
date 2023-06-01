@@ -22,6 +22,7 @@ import javax.json.bind.annotation.JsonbPropertyOrder;
         "perPage",
         "dishEmbeddedList"
 })
+@Schema(name = "dish_list", description = "Page with list of dishes.")
 public class DishList {
     @Schema(
             description = "Total number of dishes.",
@@ -49,6 +50,6 @@ public class DishList {
     private int perPage;
 
     @JsonbProperty("_embedded")
-    @Schema(description = "The list of dishes.")
+    @Schema(ref = "dish_embedded_list")
     private DishEmbeddedList dishEmbeddedList;
 }
