@@ -18,8 +18,8 @@ public class GenericExceptionMapper implements javax.ws.rs.ext.ExceptionMapper<E
         final ExceptionPayload exceptionPayload;
         final ServiceErrorCode serviceErrorCode;
 
-        if ((exception.getCause() instanceof JsonParseException) || (exception.getCause() instanceof JsonbException)
-                || (exception instanceof IllegalArgumentException) || (exception instanceof InvalidFormatException)) {
+        if ((exception.getCause() instanceof JsonParseException) || (exception instanceof IllegalArgumentException)
+                || (exception instanceof InvalidFormatException)) {
             serviceErrorCode = ServiceErrorCode.INVALID_INPUT;
         } else if (exception.getCause() instanceof JDBCConnectionException) {
             serviceErrorCode = ServiceErrorCode.DATABASE_CONNECTION_ERROR;

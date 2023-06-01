@@ -21,7 +21,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(description = "The restaurant to be read.")
 public class RestaurantRead {
 
     @Schema(

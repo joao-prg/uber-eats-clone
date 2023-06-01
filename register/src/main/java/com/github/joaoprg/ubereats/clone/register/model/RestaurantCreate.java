@@ -18,10 +18,6 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(
-        description = "The restaurant to be created.",
-        writeOnly = true
-)
 public class RestaurantCreate {
 
     @Schema(

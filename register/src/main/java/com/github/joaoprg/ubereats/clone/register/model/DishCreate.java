@@ -16,10 +16,6 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(
-        description = "The dish to be created.",
-        writeOnly = true
-)
 public class DishCreate {
 
     @Schema(

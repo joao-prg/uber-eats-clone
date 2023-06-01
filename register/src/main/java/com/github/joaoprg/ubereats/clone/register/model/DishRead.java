@@ -18,7 +18,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(description = "The dish to be read.")
 public class DishRead {
 
     @Schema(

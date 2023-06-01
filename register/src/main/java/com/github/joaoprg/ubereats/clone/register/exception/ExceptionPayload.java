@@ -1,5 +1,7 @@
 package com.github.joaoprg.ubereats.clone.register.exception;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,16 +9,29 @@ import lombok.NoArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import javax.json.bind.annotation.JsonbProperty;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(readOnly = true)
 public class ExceptionPayload {
 
-    public String code;
-    public String message;
+    private String code;
+    private String message;
     @JsonbProperty("http_status_code")
-    public int httpStatusCode;
+    private int httpStatusCode;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<FieldException> fieldExceptions;
+
+    @Data
+    @JsonAutoDetect
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class FieldException {
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        private String path;
+        private String message;
+    }
 }

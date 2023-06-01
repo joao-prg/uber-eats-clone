@@ -22,11 +22,6 @@ import javax.json.bind.annotation.JsonbPropertyOrder;
         "perPage",
         "dishEmbeddedList"
 })
-
-@Schema(
-        description = "A list of dishes.",
-        readOnly = true
-)
 public class DishList {
     @Schema(
             description = "Total number of dishes.",

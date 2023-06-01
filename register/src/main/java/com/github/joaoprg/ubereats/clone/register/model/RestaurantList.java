@@ -21,11 +21,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
         "perPage",
         "restaurantEmbeddedList"
 })
-
-@Schema(
-        description = "A list of restaurants.",
-        readOnly = true
-)
 public class RestaurantList {
     @Schema(
             description = "Total number of restaurants.",

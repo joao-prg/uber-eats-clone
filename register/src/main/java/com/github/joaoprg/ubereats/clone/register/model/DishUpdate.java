@@ -14,10 +14,6 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Schema(
-        description = "Fields to update in a given dish.",
-        writeOnly = true
-)
 public class DishUpdate {
 
     @Schema(

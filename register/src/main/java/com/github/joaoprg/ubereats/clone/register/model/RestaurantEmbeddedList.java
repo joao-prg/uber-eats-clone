@@ -14,11 +14,6 @@ import java.util.List;
 @Getter(onMethod = @__({@Schema(hidden = true)}))
 @NoArgsConstructor
 @AllArgsConstructor
-
-@Schema(
-        description = "Embedded list of restaurants.",
-        readOnly = true
-)
 public class RestaurantEmbeddedList {
     @JsonbProperty("restaurants")
     @Schema(description = "List of restaurants.")
