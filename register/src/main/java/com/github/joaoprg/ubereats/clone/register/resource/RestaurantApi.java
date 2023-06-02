@@ -1,13 +1,8 @@
 package com.github.joaoprg.ubereats.clone.register.resource;
 
-import com.github.joaoprg.ubereats.clone.register.exception.ExceptionPayload;
 import com.github.joaoprg.ubereats.clone.register.model.DishCreate;
-import com.github.joaoprg.ubereats.clone.register.model.DishList;
-import com.github.joaoprg.ubereats.clone.register.model.DishRead;
 import com.github.joaoprg.ubereats.clone.register.model.DishUpdate;
 import com.github.joaoprg.ubereats.clone.register.model.RestaurantCreate;
-import com.github.joaoprg.ubereats.clone.register.model.RestaurantList;
-import com.github.joaoprg.ubereats.clone.register.model.RestaurantRead;
 import com.github.joaoprg.ubereats.clone.register.model.RestaurantUpdate;
 import io.smallrye.common.constraint.NotNull;
 import org.eclipse.microprofile.openapi.annotations.Operation;

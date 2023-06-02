@@ -1,11 +1,10 @@
 package com.github.joaoprg.ubereats.clone.register.exception;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.google.gson.JsonParseException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.JDBCConnectionException;
 
-import javax.json.bind.JsonbException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
