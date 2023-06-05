@@ -14,6 +14,6 @@ import java.util.UUID;
 @Accessors(fluent = true)
 public class DishKey implements Serializable {
 
-    private UUID id;
     private UUID restaurantId;
+    private UUID id;
 }

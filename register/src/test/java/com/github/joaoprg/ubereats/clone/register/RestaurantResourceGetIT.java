@@ -75,5 +75,4 @@ public class RestaurantResourceGetIT {
                                 .extract().asPrettyString()
                 , pageList, perPageList, restaurantIdList);
     }
-
 }
