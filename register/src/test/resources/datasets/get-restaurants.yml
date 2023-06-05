@@ -2,13 +2,13 @@ restaurant:
   - restaurant_id: "f67e429c-ddf3-427f-8503-7afee054ae14"
     owner: "John Potato"
     name: "John's Grill"
-    created_at: "[DAY,NOW]"
-    updated_at: "[DAY,NOW]"
+    created_at: "2023-06-02 00:00:00"
+    updated_at: "2023-06-02 00:00:00"
   - restaurant_id: "ea6b2b78-7a0f-4f81-914f-406fadcc53f7"
     owner: "Haru"
     name: "Tokyo Sushi"
-    created_at: "[DAY,NOW]"
-    updated_at: "[DAY,NOW]"
+    created_at: "2023-06-02 00:00:00"
+    updated_at: "2023-06-02 00:00:00"
 
 address:
   - restaurant_id: "f67e429c-ddf3-427f-8503-7afee054ae14"

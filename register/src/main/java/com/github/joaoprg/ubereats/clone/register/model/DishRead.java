@@ -32,7 +32,7 @@ public class DishRead {
     @Schema(
             required = true,
             description = "Name of the dish.",
-            example = "Shrimp fried rice.",
+            example = "Shrimp fried rice",
             maxLength = 50
     )
     @NotNull(message = "Name cannot be null")
