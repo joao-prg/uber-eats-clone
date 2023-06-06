@@ -1,0 +1,18 @@
+restaurant:
+  - restaurant_id: "f67e429c-ddf3-427f-8503-7afee054ae14"
+    owner: "John Potato"
+    name: "John's Grill"
+    created_at: "2023-06-02 00:00:00"
+    updated_at: "2023-06-02 00:00:00"
+
+address:
+  - restaurant_id: "f67e429c-ddf3-427f-8503-7afee054ae14"
+    latitude: 38.7223
+    longitude: 9.1393
+
+dish:
+  - dish_id: "811d860d-689e-4f3d-b05b-82f2ade3c6f0"
+    restaurant_id: "f67e429c-ddf3-427f-8503-7afee054ae14"
+    name: "Shrimp fried rice"
+    description: "Vietnamese shrimp fried with basmati rice."
+    price: 5.5

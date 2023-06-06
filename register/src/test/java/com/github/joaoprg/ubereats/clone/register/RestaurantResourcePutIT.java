@@ -30,7 +30,7 @@ public class RestaurantResourcePutIT {
     @Test
     @DataSet("put-restaurant.yml")
     public void testPutRestaurantOk() {
-        RestaurantUpdate restaurantUpdate = RestaurantUpdate.
+        final RestaurantUpdate restaurantUpdate = RestaurantUpdate.
                 builder()
                 .owner("Ted's Grill")
                 .name("Ted")
@@ -40,7 +40,7 @@ public class RestaurantResourcePutIT {
                         .longitude(5.1393)
                         .build())
                 .build();
-        String result = given()
+        final String result = given()
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)
@@ -57,11 +57,11 @@ public class RestaurantResourcePutIT {
     @Test
     @DataSet("put-dish.yml")
     public void testPutDishOk() {
-        DishUpdate dishUpdate = DishUpdate
+        final DishUpdate dishUpdate = DishUpdate
                 .builder()
                 .price(8.0)
                 .build();
-        String result = given()
+        final String result = given()
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)

@@ -23,8 +23,8 @@ public class RestaurantResourceGetIT {
     @Test
     @DataSet("get-restaurants.yml")
     public void testGetRestaurantsOk() {
-        Integer[] pageList = {1, 2};
-        Integer[] perPageList = {1, 10};
+        final Integer[] pageList = {1, 2};
+        final Integer[] perPageList = {1, 10};
         CombinationApprovals.verifyAllCombinations((page, perPage) ->
                         given()
                                 .with()
@@ -41,8 +41,8 @@ public class RestaurantResourceGetIT {
     @Test
     @DataSet("get-dishes.yml")
     public void testGetDishesOk() {
-        Integer[] pageList = {1, 2};
-        Integer[] perPageList = {1, 10};
+        final Integer[] pageList = {1, 2};
+        final Integer[] perPageList = {1, 10};
         CombinationApprovals.verifyAllCombinations((page, perPage) ->
                         given()
                                 .with()
@@ -59,9 +59,10 @@ public class RestaurantResourceGetIT {
     @Test
     @DataSet("get-dishes-by-restaurant.yml")
     public void testGetDishesByRestaurantOk() {
-        Integer[] pageList = {1, 2};
-        Integer[] perPageList = {1, 10};
-        String[] restaurantIdList = {"f67e429c-ddf3-427f-8503-7afee054ae14", "ea6b2b78-7a0f-4f81-914f-406fadcc53f7"};
+        final Integer[] pageList = {1, 2};
+        final Integer[] perPageList = {1, 10};
+        final String[] restaurantIdList = {"f67e429c-ddf3-427f-8503-7afee054ae14",
+                "ea6b2b78-7a0f-4f81-914f-406fadcc53f7"};
         CombinationApprovals.verifyAllCombinations((page, perPage, restaurantId) ->
                         given()
                                 .with()

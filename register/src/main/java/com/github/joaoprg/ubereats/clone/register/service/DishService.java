@@ -48,10 +48,11 @@ public class DishService {
         try {
             final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
             Dish dish = dishMapper.toDish(dishCreate);
+            dish.setRestaurantId(restaurantId);
             dish.restaurant = restaurant;
             restaurant.dishes.add(dish);
-            dishRepository.persist(dish);
             restaurantRepository.persist(restaurant);
+            dishRepository.persist(dish);
             return dishMapper.toDishRead(dish);
         } catch (NotFoundException e) {
             throw new ServiceException(e, ServiceErrorCode.RESTAURANT_NOT_FOUND);

@@ -40,8 +40,8 @@ public class RestaurantCreate {
     @Size(max = 50)
     public String name;
 
-    @Schema(required = true, ref = "address_read")
+    @Schema(required = true, ref = "address_create")
     @NotNull(message = "Address cannot be null")
     @Valid
-    public AddressRead address;
+    public AddressCreate address;
 }
