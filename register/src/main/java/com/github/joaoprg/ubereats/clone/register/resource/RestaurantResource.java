@@ -1,11 +1,6 @@
 package com.github.joaoprg.ubereats.clone.register.resource;
 
-import com.github.joaoprg.ubereats.clone.register.model.DishCreate;
-import com.github.joaoprg.ubereats.clone.register.model.DishRead;
-import com.github.joaoprg.ubereats.clone.register.model.DishUpdate;
-import com.github.joaoprg.ubereats.clone.register.model.RestaurantCreate;
-import com.github.joaoprg.ubereats.clone.register.model.RestaurantRead;
-import com.github.joaoprg.ubereats.clone.register.model.RestaurantUpdate;
+import com.github.joaoprg.ubereats.clone.register.model.*;
 import com.github.joaoprg.ubereats.clone.register.service.DishService;
 import com.github.joaoprg.ubereats.clone.register.service.RestaurantService;
 
