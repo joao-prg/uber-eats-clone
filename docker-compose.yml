@@ -8,9 +8,10 @@ services:
     ports:
       - "5432:5432"
   keycloak:
-    image: jboss/keycloak
+    image: quay.io/keycloak/keycloak:21.1.1
     environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
       - "8180:8080"
+    command: start-dev
