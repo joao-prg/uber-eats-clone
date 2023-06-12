@@ -3,13 +3,7 @@ package com.github.joaoprg.ubereats.clone.register.resource;
 import com.github.joaoprg.ubereats.clone.register.model.*;
 import com.github.joaoprg.ubereats.clone.register.service.DishService;
 import com.github.joaoprg.ubereats.clone.register.service.RestaurantService;
-import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
-import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
@@ -19,8 +13,6 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.UUID;
 
-@RolesAllowed("owner")
-@SecurityRequirement(name = "ubereats-clone-oauth", scopes = {})
 public class RestaurantResource implements RestaurantApi{
 
     private final RestaurantService restaurantService;

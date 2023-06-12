@@ -32,7 +32,6 @@ import java.util.UUID;
 
 @Path("/restaurants")
 @Tag(ref = "Restaurants API")
-@SecurityScheme(securitySchemeName = "ubereats-clone-oauth", type = SecuritySchemeType.OAUTH2, flows = @OAuthFlows(password = @OAuthFlow(tokenUrl = "http://localhost:8180/realms/ubereats-clone/protocol/openid-connect/token")))
 public interface RestaurantApi {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
