@@ -3,7 +3,9 @@ package com.github.joaoprg.ubereats.clone.register.resource;
 import com.github.joaoprg.ubereats.clone.register.model.*;
 import com.github.joaoprg.ubereats.clone.register.service.DishService;
 import com.github.joaoprg.ubereats.clone.register.service.RestaurantService;
+import io.quarkus.security.identity.SecurityIdentity;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
@@ -14,6 +16,9 @@ import java.net.URI;
 import java.util.UUID;
 
 public class RestaurantResource implements RestaurantApi{
+
+    @Inject
+    SecurityIdentity securityIdentity;
 
     private final RestaurantService restaurantService;
 
