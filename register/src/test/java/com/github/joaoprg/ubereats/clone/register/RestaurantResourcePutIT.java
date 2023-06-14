@@ -9,13 +9,13 @@ import com.github.joaoprg.ubereats.clone.register.model.DishUpdate;
 import com.github.joaoprg.ubereats.clone.register.model.RestaurantUpdate;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.keycloak.client.KeycloakTestClient;
 import io.restassured.http.ContentType;
 import org.approvaltests.Approvals;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static io.quarkus.test.keycloak.server.KeycloakTestResourceLifecycleManager.getAccessToken;
 import static io.restassured.RestAssured.given;
 
 @DBRider
@@ -27,6 +27,7 @@ public class RestaurantResourcePutIT {
     private static final String RESTAURANT_ID = "f67e429c-ddf3-427f-8503-7afee054ae14";
     private static final String DISH_ID = "811d860d-689e-4f3d-b05b-82f2ade3c6f0";
 
+    final KeycloakTestClient keycloakClient = new KeycloakTestClient();
 
     @Test
     @DataSet("put-restaurant.yml")
@@ -43,7 +44,7 @@ public class RestaurantResourcePutIT {
                 .build();
         final String result = given()
                 .auth()
-                .oauth2(getAccessToken("alice"))
+                .oauth2(keycloakClient.getAccessToken("alice"))
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)
@@ -66,7 +67,7 @@ public class RestaurantResourcePutIT {
                 .build();
         final String result = given()
                 .auth()
-                .oauth2(getAccessToken("alice"))
+                .oauth2(keycloakClient.getAccessToken("alice"))
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)

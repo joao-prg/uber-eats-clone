@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static io.quarkus.test.keycloak.server.KeycloakTestResourceLifecycleManager.getAccessToken;
 import static io.restassured.RestAssured.given;
 
 @DBRider
@@ -31,7 +30,7 @@ public class RestaurantResourceGetIT {
         CombinationApprovals.verifyAllCombinations((page, perPage) ->
                         given()
                                 .auth()
-                                .oauth2(getAccessToken("alice"))
+                                .oauth2(keycloakClient.getAccessToken("alice"))
                                 .with()
                                 .queryParam("page", page)
                                 .queryParam("per_page", perPage)
@@ -51,7 +50,7 @@ public class RestaurantResourceGetIT {
         CombinationApprovals.verifyAllCombinations((page, perPage) ->
                         given()
                                 .auth()
-                                .oauth2(getAccessToken("alice"))
+                                .oauth2(keycloakClient.getAccessToken("alice"))
                                 .with()
                                 .queryParam("page", page)
                                 .queryParam("per_page", perPage)
@@ -73,7 +72,7 @@ public class RestaurantResourceGetIT {
         CombinationApprovals.verifyAllCombinations((page, perPage, restaurantId) ->
                         given()
                                 .auth()
-                                .oauth2(getAccessToken("alice"))
+                                .oauth2(keycloakClient.getAccessToken("alice"))
                                 .with()
                                 .pathParam("restaurant_id", restaurantId)
                                 .queryParam("page", page)

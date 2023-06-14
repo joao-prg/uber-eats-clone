@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static io.quarkus.test.keycloak.server.KeycloakTestResourceLifecycleManager.getAccessToken;
 import static io.restassured.RestAssured.given;
 
 @DBRider
@@ -31,7 +30,7 @@ public class RestaurantResourceDeleteIT {
     public void testDeleteRestaurantNoContent() {
         given()
                 .auth()
-                .oauth2(getAccessToken("alice"))
+                .oauth2(keycloakClient.getAccessToken("alice"))
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)
@@ -47,7 +46,7 @@ public class RestaurantResourceDeleteIT {
     public void testDeleteDishNoContent() {
         given()
                 .auth()
-                .oauth2(getAccessToken("alice"))
+                .oauth2(keycloakClient.getAccessToken("alice"))
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)
