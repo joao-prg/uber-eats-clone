@@ -1,7 +1,9 @@
-package com.github.joaoprg.ubereats.clone.register.exception;
+package com.github.joaoprg.ubereats.clone.register.exception.mapper;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.github.joaoprg.ubereats.clone.register.exception.ExceptionPayload;
+import com.github.joaoprg.ubereats.clone.register.exception.ServiceErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.JDBCConnectionException;
 

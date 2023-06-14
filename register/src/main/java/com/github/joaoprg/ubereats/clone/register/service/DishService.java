@@ -32,21 +32,26 @@ public class DishService {
     private final DishRepository dishRepository;
     private final DishMapper dishMapper;
 
+    private final RestaurantOwnerValidationService restaurantOwnerValidationService;
+
     @Inject
     public DishService(
             final RestaurantRepository restaurantRepository,
             final DishRepository dishRepository,
-            final DishMapper dishMapper) {
+            final DishMapper dishMapper,
+            final RestaurantOwnerValidationService restaurantOwnerValidationService) {
         this.restaurantRepository = restaurantRepository;
         this.dishRepository = dishRepository;
         this.dishMapper = dishMapper;
+        this.restaurantOwnerValidationService = restaurantOwnerValidationService;
     }
 
     @Transactional(REQUIRED)
-    public DishRead create(final UUID restaurantId, final DishCreate dishCreate) {
+    public DishRead create(final UUID restaurantId, final DishCreate dishCreate, final String username) {
         log.debug(String.format("Creating dish...[Name: %s] [Restaurant Id: %s]", dishCreate.name, restaurantId));
         try {
             final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
+            restaurantOwnerValidationService.checkOwner(username, restaurant.owner, restaurantId);
             Dish dish = dishMapper.toDish(dishCreate);
             dish.setRestaurantId(restaurantId);
             dish.restaurant = restaurant;
@@ -97,9 +102,14 @@ public class DishService {
     }
 
     @Transactional(REQUIRED)
-    public DishRead update(final UUID restaurantId, final UUID dishId, final DishUpdate dishUpdate) {
+    public DishRead update(final UUID restaurantId,
+                           final UUID dishId,
+                           final DishUpdate dishUpdate,
+                           final String username) {
         log.debug(String.format("Updating dish...[Id: %s] [Restaurant Id: %s]", dishId, restaurantId));
         try {
+            final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
+            restaurantOwnerValidationService.checkOwner(username, restaurant.owner, restaurantId);
             final Dish dish = dishRepository.readByIdOptional(restaurantId, dishId);
             dishMapper.toDish(dishUpdate, dish);
             dishRepository.persist(dish);
@@ -110,9 +120,11 @@ public class DishService {
     }
 
     @Transactional(REQUIRED)
-    public void delete(final UUID restaurantId, final UUID dishId) {
+    public void delete(final UUID restaurantId, final UUID dishId, final String username) {
         log.debug(String.format("Deleting dish...[Id: %s] [Restaurant Id: %s]", dishId, restaurantId));
         try {
+            final Restaurant restaurant = restaurantRepository.readByIdOptional(restaurantId);
+            restaurantOwnerValidationService.checkOwner(username, restaurant.owner, restaurantId);
             final Dish dish = dishRepository.readByIdOptional(restaurantId, dishId);
             dishRepository.delete(dish);
         } catch (NotFoundException e) {

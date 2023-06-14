@@ -83,7 +83,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -93,7 +93,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -146,7 +146,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -156,7 +156,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -243,7 +243,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -253,7 +253,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -311,7 +311,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -321,7 +321,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -402,7 +402,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -412,7 +412,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -475,7 +475,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -485,7 +485,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -563,7 +563,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -573,7 +573,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -671,7 +671,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -681,7 +681,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -749,7 +749,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "unauthorized",
                     responseCode = "401",
-                    description = "Unauthorized access - invalid or unverifiable JWT.",
+                    description = "Unauthorized access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),
@@ -759,7 +759,7 @@ public interface RestaurantApi {
             @APIResponse(
                     name = "forbidden",
                     responseCode = "403",
-                    description = "Forbidden access - can't find the required scope in the JWT.",
+                    description = "Forbidden access.",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON,
                             schema = @Schema(ref = "exception"),

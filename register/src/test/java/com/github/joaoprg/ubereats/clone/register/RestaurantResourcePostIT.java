@@ -35,7 +35,6 @@ public class RestaurantResourcePostIT {
     public void testPostRestaurantOk() {
         final RestaurantCreate restaurantCreate = RestaurantCreate
                 .builder()
-                .owner("Haru")
                 .name("Tokyo Sushi")
                 .address(AddressCreate
                         .builder()

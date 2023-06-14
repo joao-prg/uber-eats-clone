@@ -23,15 +23,6 @@ public class RestaurantCreate {
 
     @Schema(
             required = true,
-            description = "Owner's name.",
-            example = "John",
-            maxLength = 50
-    )
-    @NotBlank(message = "Owner cannot be blank")
-    public String owner;
-
-    @Schema(
-            required = true,
             description = "Name of the restaurant.",
             example = "John's Grill",
             maxLength = 50

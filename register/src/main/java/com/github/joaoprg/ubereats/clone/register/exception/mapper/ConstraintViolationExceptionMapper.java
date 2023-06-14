@@ -1,5 +1,6 @@
-package com.github.joaoprg.ubereats.clone.register.exception;
+package com.github.joaoprg.ubereats.clone.register.exception.mapper;
 
+import com.github.joaoprg.ubereats.clone.register.exception.ExceptionPayload;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintViolationException;

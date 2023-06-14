@@ -2,5 +2,4 @@
 
 Future work:
 - Register
-  - Exception handling for authorization and authentication (UNAUTHORIZED and FORBIDDEN)
-  - Add more tests (errors)
+  - Change owner with SecurityIdentity and check that only owner can delete and update and create for dishes

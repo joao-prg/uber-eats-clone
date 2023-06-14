@@ -13,6 +13,8 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "cdi", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface RestaurantMapper {
 
+
+    @Mapping(target = "owner", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "dishes", ignore = true)

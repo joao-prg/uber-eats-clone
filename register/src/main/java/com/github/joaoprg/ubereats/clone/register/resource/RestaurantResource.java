@@ -1,11 +1,15 @@
 package com.github.joaoprg.ubereats.clone.register.resource;
 
-import com.github.joaoprg.ubereats.clone.register.model.*;
+import com.github.joaoprg.ubereats.clone.register.model.DishCreate;
+import com.github.joaoprg.ubereats.clone.register.model.DishRead;
+import com.github.joaoprg.ubereats.clone.register.model.DishUpdate;
+import com.github.joaoprg.ubereats.clone.register.model.RestaurantCreate;
+import com.github.joaoprg.ubereats.clone.register.model.RestaurantRead;
+import com.github.joaoprg.ubereats.clone.register.model.RestaurantUpdate;
 import com.github.joaoprg.ubereats.clone.register.service.DishService;
 import com.github.joaoprg.ubereats.clone.register.service.RestaurantService;
 import io.quarkus.security.identity.SecurityIdentity;
 
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
@@ -35,7 +39,8 @@ public class RestaurantResource implements RestaurantApi{
 
     @Override
     public Response createRestaurant(RestaurantCreate restaurantCreate, @Context UriInfo uriInfo) {
-        final RestaurantRead restaurantRead = restaurantService.create(restaurantCreate);
+        final RestaurantRead restaurantRead = restaurantService.create(restaurantCreate,
+                securityIdentity.getPrincipal().getName());
         final URI uri = uriInfo.getAbsolutePathBuilder().path(restaurantRead.getId().toString()).build();
         return Response.created(uri).entity(restaurantRead).build();
     }
@@ -52,14 +57,15 @@ public class RestaurantResource implements RestaurantApi{
     public Response updateRestaurant(@PathParam("restaurant_id") UUID restaurantId,
                                      RestaurantUpdate restaurantUpdate,
                                      @Context UriInfo uriInfo) {
-        final RestaurantRead restaurantRead = restaurantService.update(restaurantId, restaurantUpdate);
+        final RestaurantRead restaurantRead = restaurantService.update(restaurantId,
+                restaurantUpdate, securityIdentity.getPrincipal().getName());
         return Response.ok(uriInfo.getAbsolutePath()).entity(restaurantRead).build();
     }
 
     @Override
     public Response deleteRestaurant(@PathParam("restaurant_id") UUID restaurantId,
                                      @Context UriInfo uriInfo) {
-        restaurantService.delete(restaurantId);
+        restaurantService.delete(restaurantId, securityIdentity.getPrincipal().getName());
         return Response.noContent().build();
     }
 
@@ -67,7 +73,8 @@ public class RestaurantResource implements RestaurantApi{
     public Response createDish(@PathParam("restaurant_id") UUID restaurantId,
                                DishCreate dishCreate,
                                @Context UriInfo uriInfo) {
-        final DishRead dishRead = dishService.create(restaurantId, dishCreate);
+        final DishRead dishRead = dishService.create(restaurantId, dishCreate,
+                securityIdentity.getPrincipal().getName());
         final URI uri = uriInfo.getAbsolutePathBuilder().path(dishRead.getId().toString()).build();
         return Response.created(uri).entity(dishRead).build();
     }
@@ -94,7 +101,8 @@ public class RestaurantResource implements RestaurantApi{
                                @PathParam("dish_id") UUID dishId,
                                DishUpdate dishUpdate,
                                @Context UriInfo uriInfo) {
-        final DishRead dishRead = dishService.update(restaurantId, dishId, dishUpdate);
+        final DishRead dishRead = dishService.update(restaurantId, dishId, dishUpdate,
+                securityIdentity.getPrincipal().getName());
         return Response.ok(uriInfo.getAbsolutePath()).entity(dishRead).build();
     }
 
@@ -102,7 +110,7 @@ public class RestaurantResource implements RestaurantApi{
     public Response deleteDish(@PathParam("restaurant_id") UUID restaurantId,
                                @PathParam("dish_id") UUID dishId,
                                @Context UriInfo uriInfo) {
-        dishService.delete(restaurantId, dishId);
+        dishService.delete(restaurantId, dishId, securityIdentity.getPrincipal().getName());
         return Response.noContent().build();
     }
 }

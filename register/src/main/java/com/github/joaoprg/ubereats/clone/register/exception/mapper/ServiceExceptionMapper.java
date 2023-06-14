@@ -1,5 +1,7 @@
-package com.github.joaoprg.ubereats.clone.register.exception;
+package com.github.joaoprg.ubereats.clone.register.exception.mapper;
 
+import com.github.joaoprg.ubereats.clone.register.exception.ExceptionPayload;
+import com.github.joaoprg.ubereats.clone.register.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.ws.rs.core.Response;
