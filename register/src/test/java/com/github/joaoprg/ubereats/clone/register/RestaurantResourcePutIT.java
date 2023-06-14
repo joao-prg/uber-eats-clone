@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
+import static io.quarkus.test.keycloak.server.KeycloakTestResourceLifecycleManager.getAccessToken;
 import static io.restassured.RestAssured.given;
 
 @DBRider
@@ -41,6 +42,8 @@ public class RestaurantResourcePutIT {
                         .build())
                 .build();
         final String result = given()
+                .auth()
+                .oauth2(getAccessToken("alice"))
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)
@@ -62,6 +65,8 @@ public class RestaurantResourcePutIT {
                 .price(8.0)
                 .build();
         final String result = given()
+                .auth()
+                .oauth2(getAccessToken("alice"))
                 .contentType(ContentType.JSON)
                 .with()
                 .pathParam("restaurant_id", RESTAURANT_ID)

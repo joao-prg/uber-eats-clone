@@ -1,5 +1,6 @@
 version: "3.8"
 services:
+
   register_db:
     image: postgres
     environment:
@@ -7,11 +8,14 @@ services:
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
+
   keycloak:
     image: quay.io/keycloak/keycloak:21.1.1
+    volumes:
+      - ./uber-eats-clone-realm.json:/opt/keycloak/data/import/uber-eats-clone-realm.json
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
       - "8180:8080"
-    command: start-dev
+    command: --import-realm

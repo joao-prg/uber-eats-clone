@@ -6,11 +6,13 @@ import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.keycloak.client.KeycloakTestClient;
 import org.approvaltests.combinations.CombinationApprovals;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
+import static io.quarkus.test.keycloak.server.KeycloakTestResourceLifecycleManager.getAccessToken;
 import static io.restassured.RestAssured.given;
 
 @DBRider
@@ -19,6 +21,7 @@ import static io.restassured.RestAssured.given;
 @QuarkusTestResource(PostgresTestResource.class)
 public class RestaurantResourceGetIT {
 
+    final KeycloakTestClient keycloakClient = new KeycloakTestClient();
 
     @Test
     @DataSet("get-restaurants.yml")
@@ -27,6 +30,8 @@ public class RestaurantResourceGetIT {
         final Integer[] perPageList = {1, 10};
         CombinationApprovals.verifyAllCombinations((page, perPage) ->
                         given()
+                                .auth()
+                                .oauth2(getAccessToken("alice"))
                                 .with()
                                 .queryParam("page", page)
                                 .queryParam("per_page", perPage)
@@ -45,6 +50,8 @@ public class RestaurantResourceGetIT {
         final Integer[] perPageList = {1, 10};
         CombinationApprovals.verifyAllCombinations((page, perPage) ->
                         given()
+                                .auth()
+                                .oauth2(getAccessToken("alice"))
                                 .with()
                                 .queryParam("page", page)
                                 .queryParam("per_page", perPage)
@@ -65,6 +72,8 @@ public class RestaurantResourceGetIT {
                 "ea6b2b78-7a0f-4f81-914f-406fadcc53f7"};
         CombinationApprovals.verifyAllCombinations((page, perPage, restaurantId) ->
                         given()
+                                .auth()
+                                .oauth2(getAccessToken("alice"))
                                 .with()
                                 .pathParam("restaurant_id", restaurantId)
                                 .queryParam("page", page)

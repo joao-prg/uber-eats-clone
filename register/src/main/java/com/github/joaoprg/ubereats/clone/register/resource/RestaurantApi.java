@@ -41,7 +41,7 @@ import java.util.UUID;
 @Path("/restaurants")
 @Tag(ref = "Restaurants API")
 @RolesAllowed("owner")
-@SecurityScheme(securitySchemeName = "uber-eats-clone-oauth", type = SecuritySchemeType.OAUTH2, flows = @OAuthFlows(password = @OAuthFlow(tokenUrl = "http://localhost:53427/realms/uber-eats-clone/protocol/openid-connect/token")))
+@SecurityScheme(securitySchemeName = "uber-eats-clone-oauth", type = SecuritySchemeType.OAUTH2, flows = @OAuthFlows(password = @OAuthFlow(tokenUrl = "http://localhost:8180/realms/uber-eats-clone/protocol/openid-connect/token")))
 @SecurityRequirement(name = "uber-eats-clone-oauth", scopes = {})
 public interface RestaurantApi {
     @POST
