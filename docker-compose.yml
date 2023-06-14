@@ -13,9 +13,18 @@ services:
     image: quay.io/keycloak/keycloak:21.1.1
     volumes:
       - ./uber-eats-clone-realm.json:/opt/keycloak/data/import/uber-eats-clone-realm.json
-    environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
       - "8180:8080"
     command: --import-realm
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "14250:14250"
+      - "9411:9411"
