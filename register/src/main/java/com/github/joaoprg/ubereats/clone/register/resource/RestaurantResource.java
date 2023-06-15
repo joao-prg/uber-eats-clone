@@ -19,14 +19,12 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.UUID;
 
-public class RestaurantResource implements RestaurantApi{
-
-    @Inject
-    SecurityIdentity securityIdentity;
+public class RestaurantResource implements RestaurantApi {
 
     private final RestaurantService restaurantService;
-
     private final DishService dishService;
+    @Inject
+    SecurityIdentity securityIdentity;
 
     @Inject
     public RestaurantResource(

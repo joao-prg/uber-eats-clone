@@ -26,14 +26,6 @@ public class RestaurantRead {
 
     @Schema(
             required = true,
-            description = "The restaurant identifier.",
-            example = "f67e429c-ddf3-427f-8503-7afee054ae14"
-    )
-    @NotNull(message = "Id cannot be null")
-    private UUID id;
-
-    @Schema(
-            required = true,
             description = "Owner's name.",
             example = "John",
             maxLength = 50
@@ -65,4 +57,12 @@ public class RestaurantRead {
     )
     @PastOrPresent
     public String createdAt;
+
+    @Schema(
+            required = true,
+            description = "The restaurant identifier.",
+            example = "f67e429c-ddf3-427f-8503-7afee054ae14"
+    )
+    @NotNull(message = "Id cannot be null")
+    private UUID id;
 }

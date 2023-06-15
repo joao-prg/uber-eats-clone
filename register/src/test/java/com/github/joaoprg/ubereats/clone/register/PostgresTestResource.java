@@ -1,9 +1,10 @@
 package com.github.joaoprg.ubereats.clone.register;
 
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import org.testcontainers.containers.PostgreSQLContainer;
+
 import java.util.HashMap;
 import java.util.Map;
-import org.testcontainers.containers.PostgreSQLContainer;
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
 public class PostgresTestResource implements QuarkusTestResourceLifecycleManager {
 

@@ -113,8 +113,7 @@ public interface RestaurantApi {
     })
     Response createRestaurant(
             @NotNull
-            @Valid
-            final RestaurantCreate restaurantCreate,
+            @Valid final RestaurantCreate restaurantCreate,
             @Context UriInfo uriInfo);
 
     @GET
@@ -290,11 +289,9 @@ public interface RestaurantApi {
                     in = ParameterIn.PATH,
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("restaurant_id")
-            final UUID restaurantId,
+            @PathParam("restaurant_id") final UUID restaurantId,
             @NotNull
-            @Valid
-            final RestaurantUpdate restaurantUpdate,
+            @Valid final RestaurantUpdate restaurantUpdate,
             @Context UriInfo uriInfo);
 
     @DELETE
@@ -351,15 +348,14 @@ public interface RestaurantApi {
     })
     Response deleteRestaurant(
             @Parameter(
-            name = "restaurant_id",
-            description = "The restaurant id.",
-            required = true,
-            example = "4ebfaa19-c46c-4648-a848-66f909ad6d3c",
-            in = ParameterIn.PATH,
-            schema = @Schema(description = "uuid", type = SchemaType.STRING)
+                    name = "restaurant_id",
+                    description = "The restaurant id.",
+                    required = true,
+                    example = "4ebfaa19-c46c-4648-a848-66f909ad6d3c",
+                    in = ParameterIn.PATH,
+                    schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("restaurant_id")
-            final UUID restaurantId,
+            @PathParam("restaurant_id") final UUID restaurantId,
             @Context UriInfo uriInfo);
 
 
@@ -439,11 +435,9 @@ public interface RestaurantApi {
                     in = ParameterIn.PATH,
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("restaurant_id")
-            final UUID restaurantId,
+            @PathParam("restaurant_id") final UUID restaurantId,
             @NotNull
-            @Valid
-            final DishCreate dishCreate,
+            @Valid final DishCreate dishCreate,
             @Context UriInfo uriInfo);
 
     @GET
@@ -600,8 +594,7 @@ public interface RestaurantApi {
                     in = ParameterIn.PATH,
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("restaurant_id")
-            final UUID restaurantId,
+            @PathParam("restaurant_id") final UUID restaurantId,
             @Parameter(
                     name = "page",
                     description = "The page requested.",
@@ -718,8 +711,7 @@ public interface RestaurantApi {
                     in = ParameterIn.PATH,
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("restaurant_id")
-            final UUID restaurantId,
+            @PathParam("restaurant_id") final UUID restaurantId,
             @Parameter(
                     name = "dish_id",
                     description = "The dish id.",
@@ -728,11 +720,9 @@ public interface RestaurantApi {
                     in = ParameterIn.PATH,
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("dish_id")
-            final UUID dishId,
+            @PathParam("dish_id") final UUID dishId,
             @NotNull
-            @Valid
-            final DishUpdate dishUpdate,
+            @Valid final DishUpdate dishUpdate,
             @Context UriInfo uriInfo);
 
     @DELETE
@@ -796,8 +786,7 @@ public interface RestaurantApi {
                     in = ParameterIn.PATH,
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("restaurant_id")
-            final UUID restaurantId,
+            @PathParam("restaurant_id") final UUID restaurantId,
             @Parameter(
                     name = "dish_id",
                     description = "The dish id.",
@@ -806,7 +795,6 @@ public interface RestaurantApi {
                     in = ParameterIn.PATH,
                     schema = @Schema(description = "uuid", type = SchemaType.STRING)
             )
-            @PathParam("dish_id")
-            final UUID dishId,
+            @PathParam("dish_id") final UUID dishId,
             @Context UriInfo uriInfo);
 }

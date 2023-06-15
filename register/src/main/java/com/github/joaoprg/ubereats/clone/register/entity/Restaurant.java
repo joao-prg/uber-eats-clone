@@ -10,7 +10,18 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -28,13 +39,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "restaurant")
 public class Restaurant {
-
-    @Id
-    @Column(name = "restaurant_id", columnDefinition = "uuid")
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @GeneratedValue(generator = "uuid")
-    private UUID id;
 
     @NotBlank(message = "Owner cannot be blank")
     public String owner;
@@ -65,10 +69,17 @@ public class Restaurant {
     public Date updatedAt;
 
     @OneToMany(
-            mappedBy="restaurant",
+            mappedBy = "restaurant",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
     public Set<@Valid Dish> dishes;
+
+    @Id
+    @Column(name = "restaurant_id", columnDefinition = "uuid")
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(generator = "uuid")
+    private UUID id;
 }

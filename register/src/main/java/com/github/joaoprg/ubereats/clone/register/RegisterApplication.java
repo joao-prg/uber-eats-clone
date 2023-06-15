@@ -18,9 +18,9 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import javax.ws.rs.core.Application;
 
 @OpenAPIDefinition(
-        tags = @Tag(name="Ubereats clone Register"),
+        tags = @Tag(name = "Ubereats clone Register"),
         info = @Info(
-                title="Ubereats clone Register API",
+                title = "Ubereats clone Register API",
                 version = "0.0.1"
         ),
         components = @Components(

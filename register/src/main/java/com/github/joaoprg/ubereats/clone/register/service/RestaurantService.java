@@ -10,13 +10,11 @@ import com.github.joaoprg.ubereats.clone.register.model.RestaurantList;
 import com.github.joaoprg.ubereats.clone.register.model.RestaurantRead;
 import com.github.joaoprg.ubereats.clone.register.model.RestaurantUpdate;
 import com.github.joaoprg.ubereats.clone.register.repository.RestaurantRepository;
-import io.quarkus.security.identity.SecurityIdentity;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.UUID;

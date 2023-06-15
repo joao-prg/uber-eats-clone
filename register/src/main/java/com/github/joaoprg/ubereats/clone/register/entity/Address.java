@@ -24,12 +24,8 @@ import java.util.UUID;
 @EqualsAndHashCode(of = {"id"})
 
 @Entity
-@Table(name = "address", uniqueConstraints = { @UniqueConstraint(columnNames = { "latitude", "longitude" }) })
+@Table(name = "address", uniqueConstraints = {@UniqueConstraint(columnNames = {"latitude", "longitude"})})
 public class Address {
-
-    @Id
-    @Column(name = "restaurant_id")
-    private UUID id;
 
     @NotNull(message = "Latitude cannot be null")
     public Double latitude;
@@ -41,4 +37,8 @@ public class Address {
     @MapsId
     @JoinColumn(name = "restaurant_id", nullable = false)
     public Restaurant restaurant;
+
+    @Id
+    @Column(name = "restaurant_id")
+    private UUID id;
 }

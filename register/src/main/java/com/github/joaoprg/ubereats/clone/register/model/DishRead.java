@@ -23,14 +23,6 @@ public class DishRead {
 
     @Schema(
             required = true,
-            description = "The dish identifier.",
-            example = "6c3bc19e-c442-4b5c-a69b-2c1f8877a703"
-    )
-    @NotNull(message = "Id cannot be null")
-    private UUID id;
-
-    @Schema(
-            required = true,
             description = "Name of the dish.",
             example = "Shrimp fried rice",
             maxLength = 50
@@ -64,4 +56,12 @@ public class DishRead {
     )
     @PositiveOrZero
     public Double price;
+
+    @Schema(
+            required = true,
+            description = "The dish identifier.",
+            example = "6c3bc19e-c442-4b5c-a69b-2c1f8877a703"
+    )
+    @NotNull(message = "Id cannot be null")
+    private UUID id;
 }
