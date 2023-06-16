@@ -9,6 +9,7 @@ import com.github.joaoprg.ubereats.clone.register.model.RestaurantUpdate;
 import com.github.joaoprg.ubereats.clone.register.service.DishService;
 import com.github.joaoprg.ubereats.clone.register.service.RestaurantService;
 import io.quarkus.security.identity.SecurityIdentity;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
@@ -35,6 +36,7 @@ public class RestaurantResource implements RestaurantApi {
     }
 
 
+    @Timed
     @Override
     public Response createRestaurant(RestaurantCreate restaurantCreate, @Context UriInfo uriInfo) {
         final RestaurantRead restaurantRead = restaurantService.create(restaurantCreate,
@@ -43,6 +45,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.created(uri).entity(restaurantRead).build();
     }
 
+    @Timed
     @Override
     public Response readRestaurants(
             @QueryParam("page") final Integer page,
@@ -51,6 +54,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.ok(restaurantService.read(page, perPage)).build();
     }
 
+    @Timed
     @Override
     public Response updateRestaurant(@PathParam("restaurant_id") UUID restaurantId,
                                      RestaurantUpdate restaurantUpdate,
@@ -60,6 +64,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.ok(uriInfo.getAbsolutePath()).entity(restaurantRead).build();
     }
 
+    @Timed
     @Override
     public Response deleteRestaurant(@PathParam("restaurant_id") UUID restaurantId,
                                      @Context UriInfo uriInfo) {
@@ -67,6 +72,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.noContent().build();
     }
 
+    @Timed
     @Override
     public Response createDish(@PathParam("restaurant_id") UUID restaurantId,
                                DishCreate dishCreate,
@@ -77,6 +83,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.created(uri).entity(dishRead).build();
     }
 
+    @Timed
     @Override
     public Response readDishes(
             @QueryParam("page") final Integer page,
@@ -85,6 +92,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.ok(dishService.read(page, perPage)).build();
     }
 
+    @Timed
     @Override
     public Response readDishesByRestaurant(
             @PathParam("restaurant_id") UUID restaurantId,
@@ -94,6 +102,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.ok(dishService.readByRestaurant(restaurantId, page, perPage)).build();
     }
 
+    @Timed
     @Override
     public Response updateDish(@PathParam("restaurant_id") UUID restaurantId,
                                @PathParam("dish_id") UUID dishId,
@@ -104,6 +113,7 @@ public class RestaurantResource implements RestaurantApi {
         return Response.ok(uriInfo.getAbsolutePath()).entity(dishRead).build();
     }
 
+    @Timed
     @Override
     public Response deleteDish(@PathParam("restaurant_id") UUID restaurantId,
                                @PathParam("dish_id") UUID dishId,
