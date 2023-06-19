@@ -19,7 +19,10 @@
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <timestamp>${maven.build.timestamp}</timestamp>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+        <lombok.version>1.18.26</lombok.version>
         <dependency.version.quarkus>2.16.6.Final</dependency.version.quarkus>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>
@@ -35,29 +38,9 @@
     </dependencyManagement>
 
     <modules>
-        <module>authentication</module>
+        <module>register</module>
         <module>marketplace</module>
         <module>order</module>
     </modules>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>io.quarkus</groupId>
-                    <artifactId>quarkus-maven-plugin</artifactId>
-                    <version>${dependency.version.quarkus}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>build</goal>
-                                <goal>generate-code</goal>
-                                <goal>generate-code-tests</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 </project>

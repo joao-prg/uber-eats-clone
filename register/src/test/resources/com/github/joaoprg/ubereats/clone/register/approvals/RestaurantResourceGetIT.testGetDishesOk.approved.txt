@@ -1,0 +1,76 @@
+[1, 1] => {
+    "total": 3,
+    "count": 1,
+    "page": 1,
+    "per_page": 1,
+    "_embedded": {
+        "dishes": [
+            {
+                "description": "Vietnamese shrimp fried with basmati rice.",
+                "id": "811d860d-689e-4f3d-b05b-82f2ade3c6f0",
+                "name": "Shrimp fried rice",
+                "price": 5.5,
+                "restaurant_id": "f67e429c-ddf3-427f-8503-7afee054ae14"
+            }
+        ]
+    }
+} 
+[1, 10] => {
+    "total": 3,
+    "count": 3,
+    "page": 1,
+    "per_page": 10,
+    "_embedded": {
+        "dishes": [
+            {
+                "description": "Vietnamese shrimp fried with basmati rice.",
+                "id": "811d860d-689e-4f3d-b05b-82f2ade3c6f0",
+                "name": "Shrimp fried rice",
+                "price": 5.5,
+                "restaurant_id": "f67e429c-ddf3-427f-8503-7afee054ae14"
+            },
+            {
+                "description": "Curry chicken with mashed potatoes.",
+                "id": "5e9acb86-4edc-4666-9b9f-032916303620",
+                "name": "Curry chicken",
+                "price": 7.5,
+                "restaurant_id": "f67e429c-ddf3-427f-8503-7afee054ae14"
+            },
+            {
+                "description": "Sunomono",
+                "id": "92c15a2f-3da9-40dd-9764-a64910743cdd",
+                "name": "Sunomono",
+                "price": 3.0,
+                "restaurant_id": "ea6b2b78-7a0f-4f81-914f-406fadcc53f7"
+            }
+        ]
+    }
+} 
+[2, 1] => {
+    "total": 3,
+    "count": 1,
+    "page": 2,
+    "per_page": 1,
+    "_embedded": {
+        "dishes": [
+            {
+                "description": "Curry chicken with mashed potatoes.",
+                "id": "5e9acb86-4edc-4666-9b9f-032916303620",
+                "name": "Curry chicken",
+                "price": 7.5,
+                "restaurant_id": "f67e429c-ddf3-427f-8503-7afee054ae14"
+            }
+        ]
+    }
+} 
+[2, 10] => {
+    "total": 3,
+    "count": 0,
+    "page": 2,
+    "per_page": 10,
+    "_embedded": {
+        "dishes": [
+            
+        ]
+    }
+} 
